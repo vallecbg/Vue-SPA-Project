@@ -4,13 +4,13 @@
             
             <v-list>
                 <v-img src="../assets/logo.png" aspect-ratio="1.4"></v-img>
-                <template v-for="(item, index) in items">
-                    <v-list-item :key="index">
+                <template v-for="item in items">
+                    <v-list-item :key="item.id">
                         <v-list-item-content>
                             <v-btn text>{{item.title}}</v-btn>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-divider :key="`divider-${index}`"></v-divider>
+                    <v-divider :key="`divider-${item.id}`"></v-divider>
                 </template>
             </v-list>
         </v-navigation-drawer>
@@ -34,9 +34,9 @@ export default {
             appTitle: "Cook Book",
             drawer: false,
             items: [
-                {title: 'Menu'},
-                {title: 'Sign In'},
-                {title: 'Sign Up'}
+                {id: 0, title: 'Menu'},
+                {id: 1, title: 'Sign In'},
+                {id: 2, title: 'Sign Up'}
             ]
         }
     }

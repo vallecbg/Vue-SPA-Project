@@ -8,12 +8,11 @@
 </template>
 
 <script>
-import AppNavigation from '@/components/AppNavigation';
 
 export default {
     name: 'App',
     components: {
-        AppNavigation
+        AppNavigation: () => import('@/components/AppNavigation')
     }
 };
 </script>
