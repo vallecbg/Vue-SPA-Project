@@ -5,7 +5,7 @@
             <div class="display-4 font-weight-black yellow--text text-center mb-3">FOR YOUR TABLE</div>
             <div class="display-1 font-weight-bold yellow--text text-center">Finally be a foodie at home with fresh, chef-prepared meals using our platform.</div>
             <v-btn fab class="mt-5 white">
-            <v-icon large color="red">arrow_downward</v-icon>
+            <v-icon large color="yellow">arrow_downward</v-icon>
             </v-btn>
         </v-layout>
     </v-container>
