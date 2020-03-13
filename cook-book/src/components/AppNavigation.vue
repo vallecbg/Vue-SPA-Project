@@ -5,39 +5,15 @@
                 <router-link class="routerLink" to="/">
                     <v-img src="../assets/logo.png" aspect-ratio="1.4"></v-img>
                 </router-link>
-
-                <v-list-item>
-                    <router-link class="routerLink" to="/about">
-                        <v-list-item-content>
-                            <v-btn text>About</v-btn>
-                        </v-list-item-content>
-                    </router-link>
-                </v-list-item>
-                <v-divider></v-divider>
-                <v-list-item>
-                    <router-link class="routerLink" to="/login">
-                        <v-list-item-content>
-                            <v-btn text>Login</v-btn>
-                        </v-list-item-content>
-                    </router-link>
-                </v-list-item>
-                <v-divider></v-divider>
-                <v-list-item>
-                    <router-link class="routerLink" to="/register">
-                        <v-list-item-content>
-                            <v-btn text>Register</v-btn>
-                        </v-list-item-content>
-                    </router-link>
-                </v-list-item>
-                <v-divider></v-divider>
-                <!-- <template v-for="item in items">
+                
+                <template v-for="item in items">
                     <v-list-item :key="item.id">
                         <v-list-item-content>
-                            <v-btn text>{{item.title}}</v-btn>
+                            <v-btn text :to="item.title">{{item.title}}</v-btn>
                         </v-list-item-content>
                     </v-list-item>
                     <v-divider :key="`divider-${item.id}`"></v-divider>
-                </template> -->
+                </template>
 
             </v-list>
         </v-navigation-drawer>
@@ -67,7 +43,12 @@ export default {
     data() {
         return {
             appTitle: 'Cook Book',
-            drawer: false
+            drawer: false,
+            items: [
+                {id:0, title: "About"},
+                {id:1, title: "Login"},
+                {id:2, title: "Register"}
+            ]
         };
     }
 };
