@@ -17,7 +17,7 @@
 
             </v-list>
         </v-navigation-drawer>
-        <v-toolbar app color="red lighten-1" dark>
+        <v-app-bar color="red lighten-1" dark>
             <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-spacer class="hidden-md-and-up"></v-spacer>
             <router-link class="routerLink" to="/">
@@ -33,7 +33,7 @@
             <router-link class="routerLink" to="/register">
                 <v-btn text class="hidden-sm-and-down">Register</v-btn>
             </router-link>
-        </v-toolbar>
+        </v-app-bar>
     </span>
 </template>
 
