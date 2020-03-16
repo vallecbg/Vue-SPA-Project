@@ -27,12 +27,19 @@
                 <v-btn text class="hidden-sm-and-down">About</v-btn>
             </router-link>
             <v-spacer class="hidden-sm-and-down"></v-spacer>
-            <router-link class="routerLink" to="/login">
-                <v-btn text class="hidden-sm-and-down">Login</v-btn>
-            </router-link>
-            <router-link class="routerLink" to="/register">
-                <v-btn text class="hidden-sm-and-down">Register</v-btn>
-            </router-link>
+            <div v-if="!isAuthenticated" class="hidden-sm-and-down">
+                <router-link class="routerLink" to="/login">
+                    <v-btn text class="hidden-sm-and-down">Login</v-btn>
+                </router-link>
+                <router-link class="routerLink" to="/register">
+                    <v-btn text class="hidden-sm-and-down">Register</v-btn>
+                </router-link>
+            </div>
+            <div v-else>
+                <div class="routerLink">
+                    <v-btn text class="hidden-sm-and-down" @click="logout" data-cy="logout">Logout</v-btn>
+                </div>
+            </div>
         </v-app-bar>
     </span>
 </template>
@@ -50,6 +57,16 @@ export default {
                 {id:2, title: "Register"}
             ]
         };
+    },
+    computed: {
+        isAuthenticated() {
+            return this.$store.getters.isAuthenticated;
+        }
+    },
+    methods: {
+        logout() {
+            this.$store.dispatch('userSignOut');
+        }
     }
 };
 </script>
