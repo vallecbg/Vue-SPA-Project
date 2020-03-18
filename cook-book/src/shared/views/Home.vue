@@ -6,12 +6,11 @@
 </template>
 
 <script>
-
 export default {
     name: 'Home',
     components: {
-        HomeHero: () => import('@/components/HomeHero'),
-        HomeDetails: () => import('@/components/HomeDetails')
+        HomeHero: () => import('../components/HomeHero'),
+        HomeDetails: () => import('../components/HomeDetails')
     }
 };
 </script>

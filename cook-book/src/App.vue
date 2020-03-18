@@ -8,14 +8,12 @@
 </template>
 
 <script>
-
 export default {
     name: 'App',
     components: {
-        AppNavigation: () => import('@/components/AppNavigation')
+        AppNavigation: () => import('@/shared/components/AppNavigation')
     }
 };
 </script>
 
-<style>
-</style>
+<style></style>

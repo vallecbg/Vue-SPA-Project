@@ -1,4 +1,3 @@
-
 <template>
     <div class="wrraper">
         <v-row align="center" class="card">
@@ -33,8 +32,14 @@
                 <v-text-field
                     v-model="repeatPassword"
                     name="repeatPassword"
-                    :append-icon="showRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                    :rules="[passwordRules.required, passwordRules.min, passwordConfirmationRule]"
+                    :append-icon="
+                        showRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'
+                    "
+                    :rules="[
+                        passwordRules.required,
+                        passwordRules.min,
+                        passwordConfirmationRule
+                    ]"
                     :type="showRepeatPassword ? 'text' : 'password'"
                     label="Repeat Password"
                     value
@@ -64,15 +69,13 @@
 </template>
 
 <script>
+import {http} from '../../shared/services/httpClient'
+
 export default {
     name: 'register',
     data() {
         return {
-            countries: [
-                'Bulgaria',
-                'United Kingdom',
-                'United States',
-            ],
+            countries: ['Bulgaria', 'United Kingdom', 'United States'],
             valid: true,
             showPassword: false,
             showRepeatPassword: false,
@@ -124,9 +127,18 @@ export default {
     methods: {
         register() {
             if (this.$refs.registerForm.validate()) {
-                this.$store.dispatch('userJoin', {
+                const user = {
                     email: this.email,
-                    password: this.password
+                    password: this.password,
+                    username: this.username,
+                    name: this.name,
+                    city: this.city,
+                    state: this.state,
+                    zip: this.zip,
+                    country: this.country
+                };
+                http.post("", user).then(() => {
+                    this.$router.push("/login");
                 });
             }
         }

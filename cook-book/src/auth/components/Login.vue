@@ -1,10 +1,9 @@
-
 <template>
     <div class="wrraper">
         <v-row align="center" class="card">
             <h2>Login</h2>
             <v-form @submit.prevent="login" v-model="valid" ref="loginForm">
-                <v-text-field v-model="email" :rules="emailRules" label="E-mail"></v-text-field>
+                <v-text-field v-model="username" :rules="usernameRules" label="Username"></v-text-field>
                 <v-text-field
                     v-model="password"
                     name="password"
@@ -38,6 +37,9 @@
 </template>
 
 <script>
+import {http} from '../../shared/services/httpClient'
+import {actionTypes as userActionTypes} from '../authState'
+
 export default {
     name: 'login',
     data() {
@@ -45,13 +47,12 @@ export default {
             valid: true,
             show: false,
             checkbox: false,
-            email: '',
-            emailRules: [
-                value => !!value || 'E-mail is required.',
-                value => {
-                    const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                    return pattern.test(value) || 'Invalid e-mail.';
-                }
+            username: '',
+            usernameRules: [
+                v => !!v || 'Username is required',
+                v =>
+                    (v && v.length >= 3) ||
+                    'Username must be at least 3 characters'
             ],
             password: '',
             passwordRules: {
@@ -64,9 +65,24 @@ export default {
     methods: {
         login() {
             if (this.$refs.loginForm.validate()) {
-                this.$store.dispatch('userLogin', {
-                    email: this.email,
+                http.post('login', {
+                    username: this.username,
                     password: this.password
+                }).then(({ data }) => {
+                    localStorage.setItem('authtoken', data._kmd.authtoken);
+                    this.$store.dispatch(userActionTypes.loginSuccess, {
+                        userInfo: data,
+                        authtoken: data._kmd.authtoken,
+                        isAuth: true
+                    });
+                    this.$bus.$emit('logged', 'User logged');
+                    this.$router.push('/');
+                    // this.$store.dispatch(
+                    //     snackbarActionTypes.setSnackbarSuccess,
+                    //     {
+                    //         message: 'Success Login'
+                    //     }
+                    // );
                 });
             }
         }

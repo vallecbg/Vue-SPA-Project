@@ -1,43 +1,37 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import store from '@/store/index.js';
-
+import authState from '../auth/authState';
+import authRoutes from '../auth/authRoutes.js';
 
 Vue.use(Router);
+
+const appRoutes = [
+    {
+        path: '/',
+        name: 'home',
+        component: () => import('../shared/views/Home.vue')
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: () => import('../shared/views/About.vue'),
+        meta: {
+            isAuthenticated: true
+        }
+    }
+];
+
+const routes = [...appRoutes, ...authRoutes];
 
 const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: () => import('../views/Home.vue')
-        },
-        {
-            path: '/about',
-            name: 'about',
-            component: () => import('../views/About.vue'),
-            meta: {
-                authRequired: true
-            }
-        },
-        {
-            path: '/login',
-            name: 'login',
-            component: () => import('../views/Login.vue')
-        },
-        {
-            path: '/register',
-            name: 'register',
-            component: () => import('../views/Register.vue')
-        }
-    ]
+    routes
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.authRequired)) {
-        if (!store.state.isAuthenticated) {
+    if (to.matched.some(record => record.meta.isAuthenticated)) {
+        if (!authState.state.isAuth) {
             next({
                 path: '/login'
             });
