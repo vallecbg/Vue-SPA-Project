@@ -18,15 +18,22 @@ const http = axios.create(config);
  * @param {*} config
  */
 const authInterceptor = config => {
-    if ((config.url === "login" ||
-        config.url === "") &&
-        config.method === "post") {
+    if (
+        (config.url === 'login' || config.url === '') &&
+        config.method === 'post'
+    ) {
         config.baseURL = `${baseUrl}/user/${appKey}`;
-        config.headers = { 'Content-Type': 'application/json', Authorization: 'Basic ' + btoa(`${appKey}:${appSecret}`) }
+        config.headers = {
+            'Content-Type': 'application/json',
+            Authorization: 'Basic ' + btoa(`${appKey}:${appSecret}`)
+        };
     } else {
-        const token = localStorage.getItem("authtoken");
+        const token = localStorage.getItem('authtoken');
         config.baseURL = `${baseUrl}/appdata/${appKey}`;
-        config.headers = { 'Content-Type': 'application/json', Authorization: 'Kinvey ' + token }
+        config.headers = {
+            'Content-Type': 'application/json',
+            Authorization: 'Kinvey ' + token
+        };
     }
     return config;
 };
@@ -50,4 +57,4 @@ http.interceptors.response.use(
     }
 );
 
-export { http } 
+export { http };

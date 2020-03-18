@@ -1,18 +1,25 @@
 <template>
     <span>
-        <v-navigation-drawer app v-model="drawer" class="red lighten-2" disable-resize-watcher dark>
+        <v-navigation-drawer
+            app
+            v-model="drawer"
+            class="red lighten-2"
+            disable-resize-watcher
+            dark
+        >
             <v-list>
                 <router-link class="routerLink" to="/">
-                    <v-img src="../../assets/logo.png" aspect-ratio="1.4"></v-img>
+                    <v-img
+                        src="../../assets/logo.png"
+                        aspect-ratio="1.4"
+                    ></v-img>
                 </router-link>
 
                 <template v-for="item in items">
                     <v-list-item :key="item.id">
                         <v-list-item-content>
                             <v-btn text :to="item.title">
-                                {{
-                                item.title
-                                }}
+                                {{ item.title }}
                             </v-btn>
                         </v-list-item-content>
                     </v-list-item>
@@ -21,7 +28,10 @@
             </v-list>
         </v-navigation-drawer>
         <v-app-bar color="red lighten-1" dark>
-            <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon
+                class="hidden-md-and-up"
+                @click="drawer = !drawer"
+            ></v-app-bar-nav-icon>
             <v-spacer class="hidden-md-and-up"></v-spacer>
             <router-link class="routerLink" to="/">
                 <v-toolbar-title to="/">{{ appTitle }}</v-toolbar-title>
@@ -40,7 +50,13 @@
             </div>
             <div v-else>
                 <div class="routerLink">
-                    <v-btn text class="hidden-sm-and-down" @click="logout" data-cy="logout">Logout</v-btn>
+                    <v-btn
+                        text
+                        class="hidden-sm-and-down"
+                        @click="logout"
+                        data-cy="logout"
+                        >Logout</v-btn
+                    >
                 </div>
             </div>
         </v-app-bar>

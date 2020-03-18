@@ -2,13 +2,41 @@
     <div class="wrraper">
         <v-row align="center" class="card">
             <h2>Register</h2>
-            <v-form @submit.prevent="register" v-model="valid" ref="registerForm">
-                <v-text-field v-model="name" :rules="nameRules" label="Full Name"></v-text-field>
-                <v-text-field v-model="username" :rules="usernameRules" label="Username"></v-text-field>
-                <v-text-field v-model="email" :rules="emailRules" label="E-mail"></v-text-field>
-                <v-text-field v-model="city" :rules="cityRules" label="City"></v-text-field>
-                <v-text-field v-model="state" :rules="stateRules" label="State/Province/Region"></v-text-field>
-                <v-text-field v-model="zip" :rules="zipRules" label="ZIP / Postal Code"></v-text-field>
+            <v-form
+                @submit.prevent="register"
+                v-model="valid"
+                ref="registerForm"
+            >
+                <v-text-field
+                    v-model="name"
+                    :rules="nameRules"
+                    label="Full Name"
+                ></v-text-field>
+                <v-text-field
+                    v-model="username"
+                    :rules="usernameRules"
+                    label="Username"
+                ></v-text-field>
+                <v-text-field
+                    v-model="email"
+                    :rules="emailRules"
+                    label="E-mail"
+                ></v-text-field>
+                <v-text-field
+                    v-model="city"
+                    :rules="cityRules"
+                    label="City"
+                ></v-text-field>
+                <v-text-field
+                    v-model="state"
+                    :rules="stateRules"
+                    label="State/Province/Region"
+                ></v-text-field>
+                <v-text-field
+                    v-model="zip"
+                    :rules="zipRules"
+                    label="ZIP / Postal Code"
+                ></v-text-field>
                 <v-autocomplete
                     v-model="country"
                     :rules="countryRules"
@@ -56,7 +84,8 @@
                         class="mr-4"
                         width="300"
                         @click="register"
-                    >Register</v-btn>
+                        >Register</v-btn
+                    >
                 </v-container>
                 <v-divider></v-divider>
             </v-form>
@@ -69,7 +98,7 @@
 </template>
 
 <script>
-import {http} from '../../shared/services/httpClient'
+import { http } from '../../shared/services/httpClient';
 
 export default {
     name: 'register',
@@ -137,8 +166,8 @@ export default {
                     zip: this.zip,
                     country: this.country
                 };
-                http.post("", user).then(() => {
-                    this.$router.push("/login");
+                http.post('', user).then(() => {
+                    this.$router.push('/login');
                 });
             }
         }

@@ -9,7 +9,7 @@ Vue.config.productionTip = false;
 
 const EventBus = new Vue();
 
-Vue.prototype.$bus = EventBus
+Vue.prototype.$bus = EventBus;
 
 new Vue({
     router,

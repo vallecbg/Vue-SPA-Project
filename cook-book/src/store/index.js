@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import authState from '../auth/authState'
+import authState from '../auth/authState';
 
 Vue.use(Vuex);
 

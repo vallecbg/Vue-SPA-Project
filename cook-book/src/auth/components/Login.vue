@@ -3,7 +3,11 @@
         <v-row align="center" class="card">
             <h2>Login</h2>
             <v-form @submit.prevent="login" v-model="valid" ref="loginForm">
-                <v-text-field v-model="username" :rules="usernameRules" label="Username"></v-text-field>
+                <v-text-field
+                    v-model="username"
+                    :rules="usernameRules"
+                    label="Username"
+                ></v-text-field>
                 <v-text-field
                     v-model="password"
                     name="password"
@@ -24,7 +28,8 @@
                         class="mr-4"
                         width="300"
                         @submit="login"
-                    >Login</v-btn>
+                        >Login</v-btn
+                    >
                 </v-container>
                 <v-divider></v-divider>
             </v-form>
@@ -37,8 +42,8 @@
 </template>
 
 <script>
-import {http} from '../../shared/services/httpClient'
-import {actionTypes as userActionTypes} from '../authState'
+import { http } from '../../shared/services/httpClient';
+import { actionTypes as userActionTypes } from '../authState';
 
 export default {
     name: 'login',

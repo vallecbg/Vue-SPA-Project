@@ -52,7 +52,4 @@ export class AppStorage {
 const appLocalStorage = new AppStorage();
 const appSessionStorage = new AppStorage(window.sessionStorage);
 
-export {
-    appLocalStorage,
-    appSessionStorage
-};
+export { appLocalStorage, appSessionStorage };
