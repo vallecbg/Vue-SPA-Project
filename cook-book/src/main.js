@@ -4,6 +4,9 @@ import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
 import '@babel/polyfill';
+//TODO: think about removing progressbar from there
+import ProgressBar from 'vuejs-progress-bar'
+Vue.use(ProgressBar);
 
 Vue.config.productionTip = false;
 
