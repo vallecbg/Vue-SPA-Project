@@ -51,7 +51,6 @@ export default {
         return {
             valid: true,
             show: false,
-            checkbox: false,
             username: '',
             usernameRules: [
                 v => !!v || 'Username is required',

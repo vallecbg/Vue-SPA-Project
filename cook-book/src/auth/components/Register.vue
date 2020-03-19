@@ -108,7 +108,6 @@ export default {
             valid: true,
             showPassword: false,
             showRepeatPassword: false,
-            checkbox: false,
             name: '',
             nameRules: [
                 v => !!v || 'Name is required',
