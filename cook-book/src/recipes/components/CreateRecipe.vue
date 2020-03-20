@@ -40,62 +40,68 @@
                     v-for="(ingredient, ingIndex) in ingredients"
                     :key="`${ingIndex}-${ingredient}`"
                 >
-                    <v-text-field
-                        v-model="ingredient.value"
-                        :rules="ingredientRules"
-                        label="Ingredient"
-                    ></v-text-field>
-                    <v-btn
-                        class="mx-2"
-                        fab
-                        dark
-                        small
-                        color="primary"
-                        @click="removeIngredient(ingIndex)"
-                    >
-                        <v-icon dark>mdi-minus</v-icon>
-                    </v-btn>
+                    <v-row>
+                        <v-text-field
+                            v-model="ingredient.value"
+                            :rules="ingredientRules"
+                            label="Ingredient"
+                        ></v-text-field>
+                        <v-btn
+                            class="mx-2"
+                            fab
+                            dark
+                            small
+                            color="red"
+                            @click="removeIngredient(ingIndex)"
+                        >
+                            <v-icon dark>mdi-minus</v-icon>
+                        </v-btn>
+                    </v-row>
                 </div>
-                <v-btn class="ma-2" dark color="indigo" @click="addIngredient">
-                    Add Ingredients
-                    <v-icon dark>mdi-plus</v-icon>
+                <v-btn class="ma-2" dark color="green" @click="addIngredient">
+                    <v-icon left dark>mdi-plus</v-icon>
+                    Ingredient
                 </v-btn>
 
                 <div v-for="(step, stepIndex) in steps" :key="stepIndex+99">
-                    <v-text-field 
-                        v-model="step.value" 
-                        :rules="stepRules" 
-                        label="Step">
-                    </v-text-field>
-                    <v-btn
-                        class="mx-2"
-                        fab
-                        dark
-                        small
-                        color="primary"
-                        @click="removeStep(stepIndex)"
-                    >
-                        <v-icon dark>mdi-minus</v-icon>
-                    </v-btn>
+                    <v-row>
+                        <v-text-field 
+                            v-model="step.value" 
+                            :rules="stepRules" 
+                            label="Step">
+                        </v-text-field>
+                        <v-btn
+                            class="mx-2"
+                            fab
+                            dark
+                            small
+                            color="red"
+                            @click="removeStep(stepIndex)"
+                        >
+                            <v-icon dark>mdi-minus</v-icon>
+                        </v-btn>
+                    </v-row>
                 </div>
-                <v-btn class="ma-2" dark color="indigo" @click="addStep">
-                    Add Steps
-                    <v-icon dark>mdi-plus</v-icon>
+                <v-btn class="ma-2" dark color="green" @click="addStep">
+                    <v-icon left dark>mdi-plus</v-icon>
+                    Step
                 </v-btn>
 
 
-                <v-file-input
-                    v-model="image"
-                    accept="image/png, image/jpeg"
-                    label="Add Image..."
-                    prepend-icon="mdi-camera"
-                    :rules="imageRules"
-                    @change.native="handleFileChange($event)"
-                ></v-file-input>
-                <v-btn class="ma-2" dark color="indigo" @click="upload">
-                    Upload Image
-                    <v-icon dark>mdi-plus</v-icon>
-                </v-btn>
+                <v-row>
+                    <v-file-input
+                        v-model="image"
+                        accept="image/png, image/jpeg"
+                        label="Add Image..."
+                        prepend-icon="mdi-camera"
+                        :rules="imageRules"
+                        @change.native="handleFileChange($event)"
+                    ></v-file-input>
+                    <v-btn class="ma-2" dark color="green" @click="upload">
+                        <v-icon left dark>mdi-cloud-upload</v-icon>
+                        Upload
+                    </v-btn>
+                </v-row>
 
                 <div v-show="showProgress">
                     <progress-bar :options="options" :value="progress" />
@@ -122,8 +128,6 @@
 </template>
 
 <script>
-//TODO: fix the buttons, make them more stylish
-//TODO: fix the validation of empty ingredients and steps
 //TODO: fix the categories and subcategories to call them from an API
 //TODO: add more categories and subcategories
 
