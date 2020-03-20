@@ -18,26 +18,20 @@
                 ></v-autocomplete>
 
                 <v-text-field
-                    v-model="prepTime"
+                    v-model.number="prepTime"
                     :rules="timeRules"
-                    hide-details
-                    single-line
                     type="number"
                     label="Prep Time (hours)"
                 />
                 <v-text-field
-                    v-model="cookTime"
+                    v-model.number="cookTime"
                     :rules="timeRules"
-                    hide-details
-                    single-line
                     type="number"
                     label="Cook Time (hours)"
                 />
                 <v-text-field
-                    v-model="servings"
+                    v-model.number="servings"
                     :rules="timeRules"
-                    hide-details
-                    single-line
                     type="number"
                     label="Number of servings"
                 />
@@ -128,7 +122,6 @@
 </template>
 
 <script>
-//TODO: add validation of the numbers to check them they're required and > 0
 //TODO: fix the buttons, make them more stylish
 //TODO: fix the validation of empty ingredients and steps
 //TODO: fix the categories and subcategories to call them from an API
@@ -180,17 +173,20 @@ export default {
             subCategories: ['Soups', 'With Meat', 'Супи : Чорби и супи'],
             subCategory: '',
             subCategoryRules: [v => !!v || 'Sub Category is required'],
-            prepTime: '',
-            cookTime: '',
-            servings: '',
-            timeRules: [v => !!v || 'Required'],
+            prepTime: null,
+            cookTime: null,
+            servings: null,
+            timeRules: [
+                v => !!v || 'Required',
+                v => (v && v > 0) || 'Must be more than 0'
+            ],
             ingredients: [],
             ingredientRules: [v => !!v || 'Ingredient is required'],
             steps: [],
             stepRules: [v => !!v || 'Step is required'],
 
             image: null,
-            imageRules: [value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',],
+            imageRules: [value => !value || value.size < 2000000 || 'Image size should be less than 2 MB!',],
 
             filesSelected: 0,
             results: null,
