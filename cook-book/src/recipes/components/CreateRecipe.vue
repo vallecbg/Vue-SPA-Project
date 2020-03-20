@@ -128,7 +128,6 @@
 </template>
 
 <script>
-//TODO: change route path to /recipe/create
 //TODO: add validation of the numbers to check them they're required and > 0
 //TODO: fix the buttons, make them more stylish
 //TODO: fix the validation of empty ingredients and steps

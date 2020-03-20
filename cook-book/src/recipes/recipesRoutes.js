@@ -1,7 +1,10 @@
 export default [
     {
-        path: '/create',
+        path: '/recipes/create',
         name: 'CreateRecipe',
-        component: () => import('./components/CreateRecipe.vue')
+        component: () => import('./components/CreateRecipe.vue'),
+        meta: {
+            isAuthenticated: true
+        }
     },
 ];
