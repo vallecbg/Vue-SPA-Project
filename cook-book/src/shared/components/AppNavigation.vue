@@ -1,43 +1,49 @@
 <template>
     <span>
-        <v-navigation-drawer
-            app
-            v-model="drawer"
-            class="red lighten-2"
-            disable-resize-watcher
-            dark
-        >
+        <v-navigation-drawer app v-model="drawer" class="red lighten-2" disable-resize-watcher dark>
             <v-list>
                 <router-link class="routerLink" to="/">
-                    <v-img
-                        src="../../assets/logo.png"
-                        aspect-ratio="1.4"
-                    ></v-img>
+                    <v-img src="../../assets/logo.png" aspect-ratio="1.4"></v-img>
                 </router-link>
 
-                <template v-for="item in items">
-                    <v-list-item :key="item.id">
-                        <v-list-item-content>
-                            <v-btn text :to="item.title">
-                                {{ item.title }}
-                            </v-btn>
-                        </v-list-item-content>
-                    </v-list-item>
-                    <v-divider :key="`divider-${item.id}`"></v-divider>
-                </template>
+                <v-list-item v-if="isAuth">
+                    <v-list-item-content>
+                        <v-btn text to="/recipes/create">Create Recipe</v-btn>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-divider v-if="isAuth"></v-divider>
+
+                <v-list-item v-if="!isAuth">
+                    <v-list-item-content>
+                        <v-btn text to="/login">Login</v-btn>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-divider v-if="!isAuth"></v-divider>
+                
+                <v-list-item v-if="!isAuth">
+                    <v-list-item-content>
+                        <v-btn text to="/register">Register</v-btn>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-divider v-if="!isAuth"></v-divider>
+
+                <v-list-item v-if="isAuth">
+                    <v-list-item-content>
+                        <v-btn text @click="logout">Logout</v-btn>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-divider v-if="isAuth"></v-divider>
+
             </v-list>
         </v-navigation-drawer>
         <v-app-bar color="red lighten-1" dark>
-            <v-app-bar-nav-icon
-                class="hidden-md-and-up"
-                @click="drawer = !drawer"
-            ></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-spacer class="hidden-md-and-up"></v-spacer>
             <router-link class="routerLink" to="/">
-                <v-toolbar-title to="/">{{ appTitle }}</v-toolbar-title>
+                <v-toolbar-title class="headerText" to="/">{{ appTitle }}</v-toolbar-title>
             </router-link>
-            <router-link class="routerLink" to="/about">
-                <v-btn text class="hidden-sm-and-down">About</v-btn>
+            <router-link class="routerLink" to="/recipes/create">
+                <v-btn text class="hidden-sm-and-down">Create Recipe</v-btn>
             </router-link>
             <v-spacer class="hidden-sm-and-down"></v-spacer>
             <div v-if="!isAuth" class="hidden-sm-and-down">
@@ -50,13 +56,7 @@
             </div>
             <div v-else>
                 <div class="routerLink">
-                    <v-btn
-                        text
-                        class="hidden-sm-and-down"
-                        @click="logout"
-                        data-cy="logout"
-                        >Logout</v-btn
-                    >
+                    <v-btn text class="hidden-sm-and-down" @click="logout" data-cy="logout">Logout</v-btn>
                 </div>
             </div>
         </v-app-bar>
@@ -72,12 +72,7 @@ export default {
         return {
             appTitle: 'Cook Book',
             isAuth: this.$store.state.authState.isAuth,
-            drawer: false,
-            items: [
-                { id: 0, title: 'About' },
-                { id: 1, title: 'Login' },
-                { id: 2, title: 'Register' }
-            ]
+            drawer: false
         };
     },
     methods: {
@@ -96,6 +91,10 @@ export default {
 </script>
 
 <style scoped>
+.headerText{
+    font-size: 30px !important;
+    font-family: 'Bubblegum Sans', cursive;
+}
 .routerLink {
     text-decoration: none;
     color: white;
