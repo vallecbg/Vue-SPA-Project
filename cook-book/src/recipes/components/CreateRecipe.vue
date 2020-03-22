@@ -59,17 +59,12 @@
                     </v-row>
                 </div>
                 <v-btn class="ma-2" dark color="green" @click="addIngredient">
-                    <v-icon left dark>mdi-plus</v-icon>
-                    Ingredient
+                    <v-icon left dark>mdi-plus</v-icon>Ingredient
                 </v-btn>
 
                 <div v-for="(step, stepIndex) in steps" :key="stepIndex+99">
                     <v-row>
-                        <v-text-field 
-                            v-model="step.value" 
-                            :rules="stepRules" 
-                            label="Step">
-                        </v-text-field>
+                        <v-text-field v-model="step.value" :rules="stepRules" label="Step"></v-text-field>
                         <v-btn
                             class="mx-2"
                             fab
@@ -83,10 +78,8 @@
                     </v-row>
                 </div>
                 <v-btn class="ma-2" dark color="green" @click="addStep">
-                    <v-icon left dark>mdi-plus</v-icon>
-                    Step
+                    <v-icon left dark>mdi-plus</v-icon>Step
                 </v-btn>
-
 
                 <v-row>
                     <v-file-input
@@ -98,14 +91,20 @@
                         @change.native="handleFileChange($event)"
                     ></v-file-input>
                     <v-btn class="ma-2" dark color="green" @click="upload">
-                        <v-icon left dark>mdi-cloud-upload</v-icon>
-                        Upload
+                        <v-icon left dark>mdi-cloud-upload</v-icon>Upload
                     </v-btn>
                 </v-row>
 
                 <div v-show="showProgress">
                     <progress-bar :options="options" :value="progress" />
                 </div>
+
+                <v-textarea
+                    v-model="description"
+                    :rules="descriptionRules"
+                    label="Description"
+                    counter="350"
+                />
 
                 <v-container class="actions">
                     <v-btn
@@ -181,7 +180,7 @@ export default {
             cookTime: null,
             servings: null,
             timeRules: [
-                v => !!v || 'Required',
+                v => !!v || 'This field is required',
                 v => (v && v > 0) || 'Must be more than 0'
             ],
             ingredients: [],
@@ -190,7 +189,18 @@ export default {
             stepRules: [v => !!v || 'Step is required'],
 
             image: null,
-            imageRules: [value => !value || value.size < 2000000 || 'Image size should be less than 2 MB!',],
+            imageRules: [
+                value =>
+                    !value ||
+                    value.size < 2000000 ||
+                    'Image size should be less than 2 MB!'
+            ],
+
+            description: '',
+            descriptionRules: [
+                v => !!v || 'This field is required',
+                v => v.length <= 350 || 'Max 350 characters',
+            ],
 
             filesSelected: 0,
             results: null,
@@ -280,9 +290,10 @@ export default {
             }
         },
         createRecipe() {
-            if(this.results){
+            if (this.results) {
                 const recipe = {
                     title: this.title,
+                    description: this.description,
                     category: this.category,
                     subCategory: this.subCategory,
                     prepTime: this.prepTime,
@@ -290,7 +301,7 @@ export default {
                     servings: this.servings,
                     ingredients: this.ingredients,
                     steps: this.steps,
-                    imageUrl: this.results.secure_url
+                    imageUrl: this.results.secure_url,
                 };
 
                 http.post('recipes', recipe).then(() => {
