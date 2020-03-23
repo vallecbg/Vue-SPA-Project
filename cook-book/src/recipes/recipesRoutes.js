@@ -7,4 +7,12 @@ export default [
             isAuthenticated: true
         }
     },
+    {
+        path: '/recipes/:id',
+        name: 'RecipeDetails',
+        component: () => import('./components/Details.vue'),
+        meta: {
+            isAuthenticated: true
+        }
+    },
 ];

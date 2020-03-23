@@ -27,6 +27,7 @@
                             outlined
                             block
                             color="red"
+                            :to="{ path: `recipes/${recipe._id}` }"
                         >Read More</v-btn>
                     </v-card-actions>
                 </v-card>
