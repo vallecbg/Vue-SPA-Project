@@ -24,6 +24,8 @@
                     <p>{{recipe.cookTime}} hours</p>
                     <h4>Servings</h4>
                     <p>{{recipe.servings}} portions</p>
+                    <h4>Description</h4>
+                    <p>{{recipe.description}}</p>
                 </div>
             </div>
 
