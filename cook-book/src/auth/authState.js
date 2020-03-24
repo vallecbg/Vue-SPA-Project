@@ -1,41 +1,61 @@
+//TODO: add toastr notifications
+import { http } from '../shared/services/httpClient';
+
 const initialState = {
-    isAuth: localStorage.getItem('authtoken') !== null,
-    userInfo: null
+  isAuth: localStorage.getItem('authtoken') !== null,
+  authtoken: localStorage.getItem('authtoken'),
+  userInfo: null
 };
 
 export const actionTypes = {
-    loginSuccess: '[AUTH] LOGIN SUCCESS',
-    loginFailed: '[AUTH] LOGIN FAILED',
-    registerSuccess: '[AUTH] LOGIN SUCCESS',
-    registerFailed: '[AUTH] LOGIN FAILED',
-    logoutSuccess: '[AUTH] LOGOUT SUCCESS'
+  loginSuccess: '[AUTH] LOGIN SUCCESS',
+  registerSuccess: '[AUTH] REGISTER SUCCESS',
+  logoutSuccess: '[AUTH] LOGOUT SUCCESS'
+};
+
+export const { loginSuccess, logoutSuccess, registerSuccess } = actionTypes;
+
+const getters = {
+  authtoken: state => state.authtoken,
+  isAuth: state => state.isAuth
+};
+
+const actions = {
+  async [loginSuccess]({ commit }, payload) {
+    const { username, password } = payload;
+    const { data } = await http.post('login', { username, password });
+    localStorage.setItem('authtoken', data._kmd.authtoken);
+    commit(loginSuccess, {
+      userInfo: data,
+      authtoken: data._kmd.authtoken,
+      isAuth: true
+    });
+  },
+  async [logoutSuccess]({ commit }) {
+    localStorage.clear();
+    commit(logoutSuccess);
+  },
+  async [registerSuccess]({ commit }, payload) {
+    await http.post('', payload);
+    commit(registerSuccess);
+  }
 };
 
 const mutations = {
-    [actionTypes.loginSuccess](state, payload) {
-        Object.assign(state, { ...payload });
-    },
-    [actionTypes.registerSuccess](state, payload) {
-        Object.assign(state, { ...payload });
-    },
-    [actionTypes.logoutSuccess](state) {
-        Object.assign(state, { isAuth: false, userInfo: null });
-    }
-};
-const actions = {
-    [actionTypes.loginSuccess]({ commit }, payload) {
-        commit(actionTypes.loginSuccess, payload);
-    },
-    [actionTypes.registerSuccess]({ commit }, payload) {
-        commit(actionTypes.registerSuccess, payload);
-    },
-    [actionTypes.logoutSuccess]({ commit }) {
-        commit(actionTypes.logoutSuccess);
-    }
+  [loginSuccess](state, payload) {
+    Object.assign(state, payload);
+  },
+  [logoutSuccess](state) {
+    Object.assign(state, { isAuth: false, authtoken: null, userInfo: null });
+  },
+  [registerSuccess](state) {
+    Object.assign(state);
+  }
 };
 
 export default {
-    mutations,
-    actions,
-    state: initialState
+  state: initialState,
+  getters,
+  actions,
+  mutations
 };

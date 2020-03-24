@@ -1,29 +1,36 @@
 import axios from 'axios';
+import {
+    cacheAdapterEnhancer
+} from 'axios-extensions';
+
 
 const baseUrl = 'https://baas.kinvey.com';
 const appKey = 'kid_B1yjlJ1IU';
 const appSecret = '1be84f7360394d6cbd6129dd9c6d5ec7';
 
+const cacheConfig = {
+    enabledByDefault: false,
+    cacheFlag: 'useCache'
+};
+
 const config = {
-    baseURL: baseUrl
+    baseURL: baseUrl,
+    headers: {
+        'Cache-Control': 'no-cache'
+    },
+    adapter: cacheAdapterEnhancer(axios.defaults.adapter, cacheConfig)
 };
 
 const http = axios.create(config);
 
-/**
- * Auth interceptors
- * @description Configuration related to AUTH token can be done in interceptors.
- * Currenlty it is just doing nothing but idea to to show the capability of axios and its interceptors
- * In future, interceptors can be created into separate files and consumed into multiple http clients
- * @param {*} config
- */
-const authInterceptor = config => {
+const authInterceptor = function (config) {
     if (
         (config.url === 'login' || config.url === '') &&
         config.method === 'post'
     ) {
         config.baseURL = `${baseUrl}/user/${appKey}`;
         config.headers = {
+            ...config.headers,
             'Content-Type': 'application/json',
             Authorization: 'Basic ' + btoa(`${appKey}:${appSecret}`)
         };
@@ -31,6 +38,7 @@ const authInterceptor = config => {
         const token = localStorage.getItem('authtoken');
         config.baseURL = `${baseUrl}/appdata/${appKey}`;
         config.headers = {
+            ...config.headers,
             'Content-Type': 'application/json',
             Authorization: 'Kinvey ' + token
         };
@@ -39,22 +47,37 @@ const authInterceptor = config => {
 };
 
 const loggerInterceptor = config => {
-    /** Add logging here */
     return config;
 };
 
-/** Adding the request interceptors */
+// Adding the request interceptors
 http.interceptors.request.use(authInterceptor);
 http.interceptors.request.use(loggerInterceptor);
 
-/** Adding the response interceptors */
-http.interceptors.response.use(
-    response => {
-        return response;
-    },
-    error => {
-        return Promise.reject(error);
+// Adding the response interceptors
+const errorInterceptor = function (error) {
+    if (error.response.status === 401) {
+        //TODO: replace it with toastr error
+        console.error(
+            `${error.response.statusText}: ${error.response.data.description}`
+        );
+    } else if (error.response.status === 500) {
+        //TODO: replace it with toastr error
+        console.error(`${error.response.statusText}: Server Error`);
+    } else {
+        //TODO: replace it with toastr error
+        console.error(`${error.response.statusText}`);
     }
-);
 
-export { http };
+    return Promise.reject(error);
+};
+
+const responseInterceptor = function (response) {
+    return response;
+};
+
+http.interceptors.response.use(responseInterceptor, errorInterceptor);
+
+export {
+    http
+};

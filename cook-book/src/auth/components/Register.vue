@@ -2,46 +2,39 @@
     <div class="wrraper">
         <v-row align="center" class="card">
             <h2>Register</h2>
-            <v-form
-                @submit.prevent="register"
-                v-model="valid"
-                ref="registerForm"
-            >
+            <v-form @submit.prevent="register" v-model="valid" ref="registerForm">
                 <v-text-field
                     v-model="name"
                     :rules="nameRules"
                     label="Full Name"
+                    :loading="loading"
                 ></v-text-field>
                 <v-text-field
                     v-model="username"
                     :rules="usernameRules"
                     label="Username"
+                    :loading="loading"
                 ></v-text-field>
-                <v-text-field
-                    v-model="email"
-                    :rules="emailRules"
-                    label="E-mail"
-                ></v-text-field>
-                <v-text-field
-                    v-model="city"
-                    :rules="cityRules"
-                    label="City"
-                ></v-text-field>
+                <v-text-field v-model="email" :rules="emailRules" label="E-mail" :loading="loading"></v-text-field>
+                <v-text-field v-model="city" :rules="cityRules" label="City" :loading="loading"></v-text-field>
                 <v-text-field
                     v-model="state"
                     :rules="stateRules"
                     label="State/Province/Region"
+                    :loading="loading"
                 ></v-text-field>
                 <v-text-field
                     v-model="zip"
                     :rules="zipRules"
                     label="ZIP / Postal Code"
+                    :loading="loading"
                 ></v-text-field>
                 <v-autocomplete
                     v-model="country"
                     :rules="countryRules"
                     :items="countries"
                     label="Country"
+                    :loading="loading"
                 ></v-autocomplete>
 
                 <v-text-field
@@ -50,6 +43,7 @@
                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                     :rules="[passwordRules.required, passwordRules.min]"
                     :type="showPassword ? 'text' : 'password'"
+                    :loading="loading"
                     label="Password"
                     value
                     class="input-group--focused"
@@ -68,6 +62,7 @@
                         passwordRules.min,
                         passwordConfirmationRule
                     ]"
+                    :loading="loading"
                     :type="showRepeatPassword ? 'text' : 'password'"
                     label="Repeat Password"
                     value
@@ -80,12 +75,11 @@
                     <v-btn
                         type="submit"
                         :disabled="!valid"
+                        :loading="loading"
                         color="success"
                         class="mr-4"
                         width="300"
-                        @click="register"
-                        >Register</v-btn
-                    >
+                    >Register</v-btn>
                 </v-container>
                 <v-divider></v-divider>
             </v-form>
@@ -98,12 +92,14 @@
 </template>
 
 <script>
-import { http } from '../../shared/services/httpClient';
+import { registerSuccess } from '../../auth/authState';
+import { mapActions } from 'vuex';
 
 export default {
     name: 'register',
     data() {
         return {
+            loading: false,
             countries: ['Bulgaria', 'United Kingdom', 'United States'],
             valid: true,
             showPassword: false,
@@ -153,22 +149,24 @@ export default {
         }
     },
     methods: {
-        register() {
-            if (this.$refs.registerForm.validate()) {
-                const user = {
-                    email: this.email,
-                    password: this.password,
-                    username: this.username,
-                    name: this.name,
-                    city: this.city,
-                    state: this.state,
-                    zip: this.zip,
-                    country: this.country
-                };
-                http.post('', user).then(() => {
-                    this.$router.push('/login');
-                });
-            }
+        //TODO: add toastr notifications
+        //TODO: get user id
+
+        ...mapActions([registerSuccess]),
+        async register() {
+            this.loading = true;
+            await this[registerSuccess]({
+                email: this.email,
+                password: this.password,
+                username: this.username,
+                name: this.name,
+                city: this.city,
+                state: this.state,
+                zip: this.zip,
+                country: this.country
+            });
+            this.loading = false;
+            this.$router.push('/login');
         }
     }
 };

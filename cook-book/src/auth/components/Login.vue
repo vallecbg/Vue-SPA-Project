@@ -6,6 +6,7 @@
                 <v-text-field
                     v-model="username"
                     :rules="usernameRules"
+                    :loading="loading"
                     label="Username"
                 ></v-text-field>
                 <v-text-field
@@ -14,6 +15,7 @@
                     :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                     :rules="[passwordRules.required, passwordRules.min]"
                     :type="show ? 'text' : 'password'"
+                    :loading="loading"
                     label="Password"
                     value
                     class="input-group--focused"
@@ -24,12 +26,12 @@
                     <v-btn
                         type="submit"
                         :disabled="!valid"
+                        :loading="loading"
                         color="success"
                         class="mr-4"
                         width="300"
                         @submit="login"
-                        >Login</v-btn
-                    >
+                    >Login</v-btn>
                 </v-container>
                 <v-divider></v-divider>
             </v-form>
@@ -42,13 +44,14 @@
 </template>
 
 <script>
-import { http } from '../../shared/services/httpClient';
-import { actionTypes as userActionTypes } from '../authState';
+import { loginSuccess } from '../authState';
+import { mapActions } from 'vuex';
 
 export default {
     name: 'login',
     data() {
         return {
+            loading: false,
             valid: true,
             show: false,
             username: '',
@@ -67,29 +70,49 @@ export default {
         };
     },
     methods: {
-        login() {
-            if (this.$refs.loginForm.validate()) {
-                http.post('login', {
+        //TODO: add toastr notifications
+
+        ...mapActions([loginSuccess]),
+        async login(){
+            try {
+                this.loading = true;
+                await this[loginSuccess]({
                     username: this.username,
                     password: this.password
-                }).then(({ data }) => {
-                    localStorage.setItem('authtoken', data._kmd.authtoken);
-                    this.$store.dispatch(userActionTypes.loginSuccess, {
-                        userInfo: data,
-                        authtoken: data._kmd.authtoken,
-                        isAuth: true
-                    });
-                    this.$bus.$emit('logged', 'User logged');
-                    this.$router.push('/');
-                    // this.$store.dispatch(
-                    //     snackbarActionTypes.setSnackbarSuccess,
-                    //     {
-                    //         message: 'Success Login'
-                    //     }
-                    // );
                 });
+                this.loading = false;
+                this.$router.push('/');
+            } catch (err) {
+                this.loading = false;
+                this.$refs.loginForm.reset();
             }
         }
+
+        // login() {
+        //     if (this.$refs.loginForm.validate()) {
+        //         http.post('login', {
+        //             username: this.username,
+        //             password: this.password
+        //         }).then(({ data }) => {
+        //             console.log(data);
+        //             localStorage.setItem('authtoken', data._kmd.authtoken);
+        //             localStorage.setItem('userId', data._id);
+        //             this.$store.dispatch(userActionTypes.loginSuccess, {
+        //                 userInfo: data,
+        //                 authtoken: data._kmd.authtoken,
+        //                 isAuth: true
+        //             });
+        //             this.$bus.$emit('logged', 'User logged');
+        //             this.$router.push('/');
+        //             // this.$store.dispatch(
+        //             //     snackbarActionTypes.setSnackbarSuccess,
+        //             //     {
+        //             //         message: 'Success Login'
+        //             //     }
+        //             // );
+        //         });
+        //     }
+        // }
     }
 };
 </script>
