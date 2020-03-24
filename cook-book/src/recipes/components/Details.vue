@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <v-card class="white">
+            <v-card class="white mx-auto">
                 <v-layout row wrap class="recipe_content_wrap">
                     <v-flex xs12 md6 order-md2>
                         <h1 class="headline mb-0">Ingredients:</h1>
@@ -47,7 +47,7 @@
                     <v-flex xs12 md6>
                         <h1 class="headline mb-0">Preparation:</h1>
                         <div v-for="(item, index) in recipe.steps" :key="index">
-                            <p v-html="item.value" class="recipe_content"></p>
+                            <p class="recipe_content">{{index + 1}}. {{item.value}}</p>
                         </div>
                     </v-flex>
                 </v-layout>
