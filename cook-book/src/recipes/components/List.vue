@@ -1,10 +1,10 @@
 <template>
     <v-container grid-list-lg>
         <v-layout row wrap class="meal-plans">
-            <v-flex v-for="recipe in recipes" :key="recipe._id" xs12 sm12 md4>
+            <v-flex v-for="recipe in allRecipes" :key="recipe._id" xs12 sm12 md4>
                 <v-card>
                     <v-list-item>
-                        <v-list-item-avatar color="grey"></v-list-item-avatar>
+                        <!-- <v-list-item-avatar color="grey"></v-list-item-avatar> -->
                         <v-list-item-content>
                             <v-list-item-title class="headline">{{recipe.title}}</v-list-item-title>
                             <v-list-item-subtitle>by Kurt Wagner</v-list-item-subtitle>
@@ -37,20 +37,22 @@
 </template>
 
 <script>
-import { http } from '../../shared/services/httpClient';
-
+import { getRecipes } from '../recipesState';
+import { mapGetters, mapActions } from 'vuex';
 export default {
     name: 'list',
     components: {},
     data() {
-        return {
-            recipes: null
-        };
+        return {};
     },
-    created() {
-        http.get('recipes').then(({ data }) => {
-            this.recipes = data;
-        });
+    computed: {
+        ...mapGetters(['allRecipes'])
+    },
+    created(){
+        this[getRecipes]();
+    },
+    methods: {
+        ...mapActions([getRecipes])
     }
 };
 </script>
