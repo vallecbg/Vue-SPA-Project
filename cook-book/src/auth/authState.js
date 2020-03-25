@@ -25,6 +25,8 @@ const actions = {
     const { username, password } = payload;
     const { data } = await http.post('login', { username, password });
     localStorage.setItem('authtoken', data._kmd.authtoken);
+    localStorage.setItem('username', data.username);
+    localStorage.setItem('userId', data._id);
     commit(loginSuccess, {
       userInfo: data,
       authtoken: data._kmd.authtoken,

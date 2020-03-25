@@ -87,32 +87,6 @@ export default {
                 this.$refs.loginForm.reset();
             }
         }
-
-        // login() {
-        //     if (this.$refs.loginForm.validate()) {
-        //         http.post('login', {
-        //             username: this.username,
-        //             password: this.password
-        //         }).then(({ data }) => {
-        //             console.log(data);
-        //             localStorage.setItem('authtoken', data._kmd.authtoken);
-        //             localStorage.setItem('userId', data._id);
-        //             this.$store.dispatch(userActionTypes.loginSuccess, {
-        //                 userInfo: data,
-        //                 authtoken: data._kmd.authtoken,
-        //                 isAuth: true
-        //             });
-        //             this.$bus.$emit('logged', 'User logged');
-        //             this.$router.push('/');
-        //             // this.$store.dispatch(
-        //             //     snackbarActionTypes.setSnackbarSuccess,
-        //             //     {
-        //             //         message: 'Success Login'
-        //             //     }
-        //             // );
-        //         });
-        //     }
-        // }
     }
 };
 </script>
