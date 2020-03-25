@@ -64,28 +64,26 @@
 </template>
 
 <script>
-import { actionTypes as userActionTypes } from '../../auth/authState';
+import { logoutSuccess } from '../../auth/authState';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'AppNavigation',
     data() {
         return {
             appTitle: 'Cook Book',
-            isAuth: this.$store.state.authState.isAuth,
             drawer: false
         };
     },
-    methods: {
-        logout() {
-            localStorage.clear();
-            this.$store.dispatch(userActionTypes.logoutSuccess);
-            this.isAuth = false;
-        }
+    computed: {
+        ...mapGetters(['isAuth'])
     },
-    created() {
-        this.$bus.$on('logged', () => {
-            this.isAuth = this.$store.state.authState.isAuth;
-        });
+    methods: {
+        ...mapActions([logoutSuccess]),
+        logout(){
+            this[logoutSuccess]();
+            this.$router.push('/', () => {});
+        }
     }
 };
 </script>
