@@ -10,13 +10,14 @@ const initialState = {
 const actionTypes = {
     getRecipes: '[RECIPE] GET ALL RECIPES SUCCESS',
     getRecipe: '[RECIPE] GET SINGLE RECIPE SUCCESS',
+    createRecipe: '[RECIPE] CREATE NEW RECIPE SUCCESS',
     //deleteRecipe: '[RECIPE] DELETE RECIPE SUCCESS',
-    //createRecipe: '[RECIPE] CREATE NEW RECIPE SUCCESS',
 }
 
 export const {
     getRecipes,
     getRecipe,
+    createRecipe
 } = actionTypes;
 
 const getters = {
@@ -39,6 +40,12 @@ const actions = {
         commit(getRecipe, data)
     },
 
+    async[createRecipe]({commit}, payload) {
+        const recipe = Object.assign(payload);
+        const { data } = await http.post('recipes', recipe);
+        commit(createRecipe, {recipe: data});
+    }
+
     //TODO: Create recipe
     //TODO: Delete recipe
     //TODO: Edit recipe
@@ -50,6 +57,11 @@ const mutations = {
     },
     [getRecipe](state, payload) {
         Object.assign(state, {recipe: payload});
+    },
+    [createRecipe](state, payload) {
+        const { recipe } = payload;
+        const list = state.allRecipes.concat(recipe);
+        Object.assign(state, {allRecipes: list});
     }
 }
 

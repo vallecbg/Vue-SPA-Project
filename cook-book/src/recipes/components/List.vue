@@ -47,7 +47,9 @@ export default {
     name: 'list',
     components: {},
     data() {
-        return {};
+        return {
+            recipes: []
+        };
     },
     computed: {
         ...mapGetters(['allRecipes'])

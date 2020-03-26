@@ -2,36 +2,41 @@
     <div class="wrraper">
         <v-row align="center" class="card">
             <h2>Create Recipe</h2>
-            <v-form @submit.prevent="createRecipe" v-model="valid" ref="loginForm">
+            <v-form @submit.prevent="createRecipe" v-model="valid" ref="createForm">
                 <v-text-field v-model="title" :rules="titleRules" label="Title"></v-text-field>
                 <v-autocomplete
                     v-model="category"
                     :rules="categoryRules"
                     :items="categories"
+                    :loading="loading"
                     label="Category"
                 ></v-autocomplete>
                 <v-autocomplete
                     v-model="subCategory"
                     :rules="subCategoryRules"
                     :items="subCategories"
+                    :loading="loading"
                     label="Subcategory"
                 ></v-autocomplete>
 
                 <v-text-field
                     v-model.number="prepTime"
                     :rules="timeRules"
+                    :loading="loading"
                     type="number"
                     label="Prep Time (hours)"
                 />
                 <v-text-field
                     v-model.number="cookTime"
                     :rules="timeRules"
+                    :loading="loading"
                     type="number"
                     label="Cook Time (hours)"
                 />
                 <v-text-field
                     v-model.number="servings"
                     :rules="timeRules"
+                    :loading="loading"
                     type="number"
                     label="Number of servings"
                 />
@@ -44,6 +49,7 @@
                         <v-text-field
                             v-model="ingredient.value"
                             :rules="ingredientRules"
+                            :loading="loading"
                             label="Ingredient"
                         ></v-text-field>
                         <v-btn
@@ -52,32 +58,34 @@
                             dark
                             small
                             color="red"
+                            :loading="loading"
                             @click="removeIngredient(ingIndex)"
                         >
                             <v-icon dark>mdi-minus</v-icon>
                         </v-btn>
                     </v-row>
                 </div>
-                <v-btn class="ma-2" dark color="green" @click="addIngredient">
+                <v-btn class="ma-2" dark color="green" :loading="loading" @click="addIngredient">
                     <v-icon left dark>mdi-plus</v-icon>Ingredient
                 </v-btn>
 
                 <div v-for="(step, stepIndex) in steps" :key="stepIndex+99">
                     <v-row>
-                        <v-text-field v-model="step.value" :rules="stepRules" label="Step"></v-text-field>
+                        <v-text-field v-model="step.value" :loading="loading" :rules="stepRules" label="Step"></v-text-field>
                         <v-btn
                             class="mx-2"
                             fab
                             dark
                             small
                             color="red"
+                            :loading="loading"
                             @click="removeStep(stepIndex)"
                         >
                             <v-icon dark>mdi-minus</v-icon>
                         </v-btn>
                     </v-row>
                 </div>
-                <v-btn class="ma-2" dark color="green" @click="addStep">
+                <v-btn class="ma-2" dark color="green" :loading="loading" @click="addStep">
                     <v-icon left dark>mdi-plus</v-icon>Step
                 </v-btn>
 
@@ -88,9 +96,10 @@
                         label="Add Image..."
                         prepend-icon="mdi-camera"
                         :rules="imageRules"
+                        :loading="loading"
                         @change.native="handleFileChange($event)"
                     ></v-file-input>
-                    <v-btn class="ma-2" dark color="green" @click="upload">
+                    <v-btn class="ma-2" dark color="green" :loading="loading" @click="upload">
                         <v-icon left dark>mdi-cloud-upload</v-icon>Upload
                     </v-btn>
                 </v-row>
@@ -102,6 +111,7 @@
                 <v-textarea
                     v-model="description"
                     :rules="descriptionRules"
+                    :loading="loading"
                     label="Description"
                     counter="350"
                 />
@@ -110,10 +120,10 @@
                     <v-btn
                         type="submit"
                         :disabled="!valid"
+                        :loading="loading"
                         color="success"
                         class="mr-4"
                         width="300"
-                        @submit="createRecipe"
                     >Create Recipe</v-btn>
                 </v-container>
                 <v-divider></v-divider>
@@ -132,7 +142,8 @@
 
 //TODO: extract the upload method in separate file (optional)
 //TODO: add multiple images (optional)
-import { http } from '../../shared/services/httpClient';
+import { mapActions } from 'vuex';
+import { createRecipe } from '../recipesState';
 import axios from 'axios';
 import ProgressBar from 'vuejs-progress-bar';
 
@@ -163,6 +174,7 @@ export default {
         };
         return {
             valid: true,
+            loading: false,
             title: '',
             titleRules: [
                 v => !!v || 'Title is required',
@@ -190,6 +202,7 @@ export default {
 
             image: null,
             imageRules: [
+                value => !!value || 'Image is required',
                 value =>
                     !value ||
                     value.size < 2000000 ||
@@ -199,7 +212,7 @@ export default {
             description: '',
             descriptionRules: [
                 v => !!v || 'This field is required',
-                v => v.length <= 350 || 'Max 350 characters',
+                v => v.length <= 350 || 'Max 350 characters'
             ],
 
             filesSelected: 0,
@@ -289,9 +302,12 @@ export default {
                 reader.readAsDataURL(this.file);
             }
         },
-        createRecipe() {
-            if (this.results) {
-                const recipe = {
+
+        ...mapActions([createRecipe]),
+        async createRecipe() {
+            if(this.results){
+                this.loading = true;
+                await this[createRecipe]({
                     title: this.title,
                     description: this.description,
                     category: this.category,
@@ -303,13 +319,13 @@ export default {
                     steps: this.steps,
                     imageUrl: this.results.secure_url,
                     creator: localStorage.getItem('userId')
-                };
-
-                http.post('recipes', recipe).then(() => {
-                    this.$router.push('/');
                 });
+                this.loading = false;
+                this.$router.push('/', () => {});
+            } else {
+                alert('Upload the image!')
             }
-        }
+        },
     }
 };
 </script>

@@ -11,12 +11,11 @@
 </template>
 
 <script>
-import List from '../../recipes/components/List' 
 import { mapGetters } from 'vuex';
 export default {
     name: 'HomeDetails',
     components: {
-        List
+        List: () => import('../../recipes/components/List' )
     },
     computed: {
         ...mapGetters(['isAuth'])
