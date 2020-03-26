@@ -34,7 +34,17 @@ const authInterceptor = function (config) {
             'Content-Type': 'application/json',
             Authorization: 'Basic ' + btoa(`${appKey}:${appSecret}`)
         };
-    } else {
+    }
+    else if (config.url[0] === '/' && config.method === 'get') {
+        const token = localStorage.getItem('authtoken');
+        config.baseURL = `${baseUrl}/appdata/${appKey}`;
+        config.headers = {
+            ...config.headers,
+            'Content-Type': 'application/json',
+            Authorization: 'Kinvey ' + token
+        };
+    }
+    else {
         const token = localStorage.getItem('authtoken');
         config.baseURL = `${baseUrl}/appdata/${appKey}`;
         config.headers = {

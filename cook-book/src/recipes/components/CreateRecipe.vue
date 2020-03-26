@@ -302,6 +302,7 @@ export default {
                     ingredients: this.ingredients,
                     steps: this.steps,
                     imageUrl: this.results.secure_url,
+                    creator: localStorage.getItem('userId')
                 };
 
                 http.post('recipes', recipe).then(() => {

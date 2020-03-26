@@ -4,20 +4,28 @@ import { http } from '../shared/services/httpClient';
 const initialState = {
   isAuth: localStorage.getItem('authtoken') !== null,
   authtoken: localStorage.getItem('authtoken'),
-  userInfo: null
+  userInfo: null,
+  user: null
 };
 
 export const actionTypes = {
   loginSuccess: '[AUTH] LOGIN SUCCESS',
   registerSuccess: '[AUTH] REGISTER SUCCESS',
-  logoutSuccess: '[AUTH] LOGOUT SUCCESS'
+  logoutSuccess: '[AUTH] LOGOUT SUCCESS',
+  getUser: '[USER] GET SINGLE USER SUCCESS'
 };
 
-export const { loginSuccess, logoutSuccess, registerSuccess } = actionTypes;
+export const { 
+  loginSuccess, 
+  logoutSuccess, 
+  registerSuccess,
+  getUser
+} = actionTypes;
 
 const getters = {
   authtoken: state => state.authtoken,
-  isAuth: state => state.isAuth
+  isAuth: state => state.isAuth,
+  user: state => state.user
 };
 
 const actions = {
@@ -40,6 +48,11 @@ const actions = {
   async [registerSuccess]({ commit }, payload) {
     await http.post('', payload);
     commit(registerSuccess);
+  },
+  async [getUser]({commit}, payload){
+    const {userId} = payload;
+    const user = await http.get(`/?query={"_id":"${userId}"}`);
+    commit(getUser, user);
   }
 };
 
@@ -51,6 +64,9 @@ const mutations = {
     Object.assign(state, { isAuth: false, authtoken: null, userInfo: null });
   },
   [registerSuccess](state) {
+    Object.assign(state);
+  },
+  [getUser](state){
     Object.assign(state);
   }
 };

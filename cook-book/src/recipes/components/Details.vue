@@ -26,6 +26,17 @@
                     <p>{{recipe.servings}} portions</p>
                     <h4>Description</h4>
                     <p>{{recipe.description}}</p>
+                    <div v-if="recipe.creator === currentUser">
+                        <h4>Manage Recipe</h4>
+                        <v-row class="d-inline-flex">
+                            <v-col>
+                                <v-btn dark depressed color="green">Edit</v-btn>
+                            </v-col>
+                            <v-col>
+                                <v-btn dark depressed color="red">Delete</v-btn>
+                            </v-col>
+                        </v-row>
+                    </div>
                 </div>
             </div>
 
@@ -39,9 +50,12 @@
                                 :key="index"
                             >
                                 <v-list-item-content class="ml-n12">
-                                    <v-list-item-title><v-icon
-                                        class="amber--text text--darken-2"
-                                    >md_fiber_manual_record</v-icon>{{item.value}}</v-list-item-title>
+                                    <v-list-item-title>
+                                        <v-icon
+                                            class="amber--text text--darken-2"
+                                        >md_fiber_manual_record</v-icon>
+                                        {{item.value}}
+                                    </v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item-group>
                         </v-list>
@@ -62,19 +76,21 @@
 //TODO: Add comments box (optional)
 import { mapGetters, mapActions } from 'vuex';
 import { getRecipe } from '../recipesState';
+import { getUser } from '../../auth/authState';
 
 export default {
     name: 'RecipeDetails',
     data() {
         return {
-            recipeId: null
+            recipeId: null,
+            currentUser: localStorage.getItem('userId')
         };
     },
     computed: {
-        ...mapGetters(['recipe'])
+        ...mapGetters(['recipe', 'user'])
     },
     methods: {
-        ...mapActions([getRecipe])
+        ...mapActions([getRecipe, getUser])
     },
     created() {
         this.recipeId = this.$route.params.id;

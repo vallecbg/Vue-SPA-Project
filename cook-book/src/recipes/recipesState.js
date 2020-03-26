@@ -16,12 +16,12 @@ const actionTypes = {
 
 export const {
     getRecipes,
-    getRecipe
+    getRecipe,
 } = actionTypes;
 
 const getters = {
     allRecipes: state => state.allRecipes,
-    recipe: state => state.recipe
+    recipe: state => state.recipe,
 }
 
 const actions = {

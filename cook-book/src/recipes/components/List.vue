@@ -33,6 +33,10 @@
                 </v-card>
             </v-flex>
         </v-layout>
+        <p v-if="allRecipes.length === 0" class="text-center my-5">
+            There are no recipes yet! Let's
+            <router-link to="/recipes/create">create</router-link> a one!
+        </p>
     </v-container>
 </template>
 
@@ -48,7 +52,7 @@ export default {
     computed: {
         ...mapGetters(['allRecipes'])
     },
-    created(){
+    created() {
         this[getRecipes]();
     },
     methods: {
