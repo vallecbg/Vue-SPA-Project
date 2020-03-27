@@ -12,7 +12,7 @@
             <div class="display-1 font-weight-bold yellow--text text-center">
                 Finally be a foodie at home with fresh meals using our platform.
             </div>
-            <v-btn fab class="mt-5 white">
+            <v-btn @click="$vuetify.goTo('#homeDetails')" fab class="mt-5 white">
                 <v-icon large color="yellow">arrow_downward</v-icon>
             </v-btn>
         </v-layout>

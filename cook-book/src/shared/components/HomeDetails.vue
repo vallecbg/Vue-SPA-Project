@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container id="homeDetails">
         <v-layout column>
             <v-flex class="display-2 text-center my-5">The newest recipes</v-flex>
             <List v-if="isAuth" />
