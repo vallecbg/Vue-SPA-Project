@@ -142,33 +142,12 @@
 import { mapActions } from 'vuex';
 import { createRecipe } from '../recipesState';
 import axios from 'axios';
-// import ProgressBar from 'vuejs-progress-bar';
 
 export default {
     name: 'CreateRecipe',
     components: {
-        // ProgressBar
     },
     data() {
-        const progressBarOptions = {
-            text: {
-                shadowColor: 'black',
-                fontSize: 14,
-                fontFamily: 'Helvetica',
-                dynamicPosition: true
-            },
-            progress: {
-                color: '#E8C401',
-                backgroundColor: '#000000'
-            },
-            layout: {
-                height: 35,
-                width: 140,
-                type: 'line',
-                progressPadding: 0,
-                verticalTextAlign: 63
-            }
-        };
         return {
             valid: true,
             loading: false,
