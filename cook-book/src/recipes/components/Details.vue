@@ -30,7 +30,7 @@
                         <h4>Manage Recipe</h4>
                         <v-row class="d-inline-flex">
                             <v-col>
-                                <v-btn dark depressed color="green">Edit</v-btn>
+                                <v-btn :to="{ path: `/recipes/edit/${recipe._id}` }" dark depressed color="green">Edit</v-btn>
                             </v-col>
                             <v-col>
                                 <v-btn dark depressed color="red">Delete</v-btn>
@@ -76,7 +76,6 @@
 //TODO: Add comments box (optional)
 import { mapGetters, mapActions } from 'vuex';
 import { getRecipe } from '../recipesState';
-import { getUser } from '../../auth/authState';
 
 export default {
     name: 'RecipeDetails',
@@ -87,10 +86,10 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['recipe', 'user'])
+        ...mapGetters(['recipe'])
     },
     methods: {
-        ...mapActions([getRecipe, getUser])
+        ...mapActions([getRecipe])
     },
     created() {
         this.recipeId = this.$route.params.id;

@@ -15,4 +15,12 @@ export default [
             isAuthenticated: true
         }
     },
+    {
+        path: '/recipes/edit/:id',
+        name: 'EditRecipe',
+        component: () => import('./components/EditRecipe.vue'),
+        meta: {
+            isAuthenticated: true
+        }
+    },
 ];
