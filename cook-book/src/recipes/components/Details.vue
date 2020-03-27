@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <v-card class="white mx-auto">
+            <v-card v-if="recipe.ingredients.length > 0 && recipe.steps.length > 0" class="white mx-auto">
                 <v-layout row wrap class="recipe_content_wrap">
                     <v-flex xs12 md6 order-md2>
                         <h1 class="headline mb-0">Ingredients:</h1>
