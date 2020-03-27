@@ -33,14 +33,14 @@
                                 <v-btn :to="{ path: `/recipes/edit/${recipe._id}` }" dark depressed color="green">Edit</v-btn>
                             </v-col>
                             <v-col>
-                                <v-btn dark depressed color="red">Delete</v-btn>
+                                <v-btn :loading="loading" @click="deleteRecipe({id: recipe._id})" dark depressed color="red">Delete</v-btn>
                             </v-col>
                         </v-row>
                     </div>
                 </div>
             </div>
 
-            <v-card v-if="recipe.ingredients.length > 0 && recipe.steps.length > 0" class="white mx-auto">
+            <v-card v-if="recipe.ingredients !== [] && recipe.steps !== []" class="white mx-auto">
                 <v-layout row wrap class="recipe_content_wrap">
                     <v-flex xs12 md6 order-md2>
                         <h1 class="headline mb-0">Ingredients:</h1>
@@ -75,12 +75,13 @@
 //TODO: Add the name of the creator of the recipe
 //TODO: Add comments box (optional)
 import { mapGetters, mapActions } from 'vuex';
-import { getRecipe } from '../recipesState';
+import { getRecipe, deleteRecipe } from '../recipesState';
 
 export default {
     name: 'RecipeDetails',
     data() {
         return {
+            loading: false,
             recipeId: null,
             currentUser: localStorage.getItem('userId')
         };
@@ -89,7 +90,14 @@ export default {
         ...mapGetters(['recipe'])
     },
     methods: {
-        ...mapActions([getRecipe])
+        ...mapActions([getRecipe, deleteRecipe]),
+
+        deleteRecipe(id) {
+            this.loading = true;
+            this[deleteRecipe](id);
+            this.loading = false;
+            this.$router.push('/', () => {})
+        }
     },
     created() {
         this.recipeId = this.$route.params.id;

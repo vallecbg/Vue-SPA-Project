@@ -105,7 +105,6 @@
                 </v-row>
 
                 <div v-show="showProgress">
-                    <!-- <progress-bar :options="options" :value="progress" /> -->
                     <v-progress-linear :value="progress"></v-progress-linear>
                 </div>
 
@@ -199,7 +198,6 @@ export default {
             fileContents: null,
             progress: 0,
             showProgress: false,
-            options: progressBarOptions,
             file: null
         };
     },

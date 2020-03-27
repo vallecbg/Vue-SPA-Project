@@ -54,8 +54,8 @@ export default {
     computed: {
         ...mapGetters(['allRecipes'])
     },
-    created() {
-        this[getRecipes]();
+    beforeMount() {
+        this[getRecipes]()
     },
     methods: {
         ...mapActions([getRecipes])
