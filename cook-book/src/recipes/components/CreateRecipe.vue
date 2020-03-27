@@ -105,7 +105,8 @@
                 </v-row>
 
                 <div v-show="showProgress">
-                    <progress-bar :options="options" :value="progress" />
+                    <!-- <progress-bar :options="options" :value="progress" /> -->
+                    <v-progress-linear :value="progress"></v-progress-linear>
                 </div>
 
                 <v-textarea
@@ -128,10 +129,6 @@
                 </v-container>
                 <v-divider></v-divider>
             </v-form>
-            <p class="text">
-                Don't have an account?
-                <router-link to="/register">Register</router-link>
-            </p>
         </v-row>
     </div>
 </template>
@@ -145,12 +142,12 @@
 import { mapActions } from 'vuex';
 import { createRecipe } from '../recipesState';
 import axios from 'axios';
-import ProgressBar from 'vuejs-progress-bar';
+// import ProgressBar from 'vuejs-progress-bar';
 
 export default {
     name: 'CreateRecipe',
     components: {
-        ProgressBar
+        // ProgressBar
     },
     data() {
         const progressBarOptions = {
