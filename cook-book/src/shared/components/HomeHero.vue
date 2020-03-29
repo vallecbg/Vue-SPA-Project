@@ -1,6 +1,6 @@
 <template>
     <v-container fluid fill-height class="home-hero" style="max-height: 100vh;">
-        <v-layout justify-center align-center column pa-5>
+        <v-layout justify-center align-center column pa-5 style="height: auto !important; padding: 0 !important;">
             <div class="display-4 font-weight-black yellow--text text-center">
                 HEALTHY MEALS
             </div>
@@ -12,7 +12,7 @@
             <div class="display-1 font-weight-bold yellow--text text-center">
                 Finally be a foodie at home with fresh meals using our platform.
             </div>
-            <v-btn @click="$vuetify.goTo('#homeDetails')" fab class="mt-5 white">
+            <v-btn  @click="$vuetify.goTo('#homeDetails')" fab class="mt-5 white hidden-sm-and-down">
                 <v-icon large color="yellow">arrow_downward</v-icon>
             </v-btn>
         </v-layout>

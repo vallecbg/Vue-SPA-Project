@@ -8,28 +8,35 @@
 
                 <v-list-item v-if="isAuth">
                     <v-list-item-content>
-                        <v-btn text to="/recipes/create">Create Recipe</v-btn>
+                        <v-btn class="routerMobile" text to="/recipes/create">Create Recipe</v-btn>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-divider v-if="isAuth"></v-divider>
+
+                <v-list-item v-if="isAuth">
+                    <v-list-item-content>
+                        <v-btn class="routerMobile" text :to="{path: `/users/${userId}`}">My Profile</v-btn>
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider v-if="isAuth"></v-divider>
 
                 <v-list-item v-if="!isAuth">
                     <v-list-item-content>
-                        <v-btn text to="/login">Login</v-btn>
+                        <v-btn class="routerMobile" text to="/login">Login</v-btn>
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider v-if="!isAuth"></v-divider>
                 
                 <v-list-item v-if="!isAuth">
-                    <v-list-item-content>
-                        <v-btn text to="/register">Register</v-btn>
+                    <v-list-item-content >
+                        <v-btn class="routerMobile" text to="/register">Register</v-btn>
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider v-if="!isAuth"></v-divider>
 
                 <v-list-item v-if="isAuth">
                     <v-list-item-content>
-                        <v-btn text @click="logout">Logout</v-btn>
+                        <v-btn class="routerMobile" text @click="logout">Logout</v-btn>
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider v-if="isAuth"></v-divider>
@@ -44,6 +51,9 @@
             </router-link>
             <router-link class="routerLink" to="/recipes/create">
                 <v-btn text class="hidden-sm-and-down">Create Recipe</v-btn>
+            </router-link>
+            <router-link class="routerLink" :to="{path: `/users/${userId}`}">
+                <v-btn text class="hidden-sm-and-down">My Profile</v-btn>
             </router-link>
             <v-spacer class="hidden-sm-and-down"></v-spacer>
             <div v-if="!isAuth" class="hidden-sm-and-down">
@@ -72,7 +82,8 @@ export default {
     data() {
         return {
             appTitle: 'Cook Book',
-            drawer: false
+            drawer: false,
+            userId: localStorage.getItem('userId')
         };
     },
     computed: {
@@ -91,10 +102,15 @@ export default {
 <style scoped>
 .headerText{
     font-size: 30px !important;
-    font-family: 'Bubblegum Sans', cursive;
+    font-family: 'Bubblegum Sans', cursive !important;
 }
 .routerLink {
-    text-decoration: none;
-    color: white;
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.routerMobile {
+    text-decoration: none !important;
+    color: white !important;
 }
 </style>

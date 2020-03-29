@@ -16,4 +16,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+a {
+    text-decoration: none !important;
+    color: #fff !important;
+}
+.container {
+    background-color: #fff !important;
+}
+.md-theme-default{
+    background-color: #fff;
+}
+</style>

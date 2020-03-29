@@ -35,9 +35,9 @@ const authInterceptor = function (config) {
             Authorization: 'Basic ' + btoa(`${appKey}:${appSecret}`)
         };
     }
-    else if (config.url[0] === '/' && config.method === 'get') {
+    else if (config.url[0] === '/' && config.method === 'get' && config.getUser === true) {
         const token = localStorage.getItem('authtoken');
-        config.baseURL = `${baseUrl}/appdata/${appKey}`;
+        config.baseURL = `${baseUrl}/user/${appKey}`;
         config.headers = {
             ...config.headers,
             'Content-Type': 'application/json',

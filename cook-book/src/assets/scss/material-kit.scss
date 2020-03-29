@@ -1,0 +1,31 @@
+/*!
+
+ =========================================================
+ * Vue Material Kit - v1.2.2
+ =========================================================
+
+ * Product Page: http://www.creative-tim.com/product/vue-material-kit
+ * Copyright 2019 Creative Tim (http://www.creative-tim.com)
+ * Licensed under MIT (https://github.com/creativetimofficial/vue-material-kit/blob/master/LICENSE.md)
+
+ =========================================================
+
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+ */
+
+
+//variables and mixins
+ @import "material-kit/variables";
+ @import "material-kit/mixins";
+ @import "material-kit/shadows";
+
+// Core CSS
+@import "material-kit/typography";
+@import "material-kit/layout";
+@import "material-kit/headers";
+@import "material-kit/example-pages";
+
+// Fancy Stuff
+@import "material-kit/cards";
+@import "material-kit/responsive";

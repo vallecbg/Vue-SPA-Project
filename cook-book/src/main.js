@@ -4,6 +4,9 @@ import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
 import '@babel/polyfill';
+import MaterialKit from "./plugins/material-kit";
+
+Vue.use(MaterialKit)
 
 
 Vue.config.productionTip = false;
