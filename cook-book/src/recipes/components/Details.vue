@@ -14,6 +14,8 @@
             </div>
             <div class="col-md-6">
                 <div class="recipe-details">
+                    <h4>Creator</h4>
+                    <router-link class="link" :to="{path: `/users/${user._id}`}">{{user.name}}</router-link>
                     <h4>Category</h4>
                     <v-chip class="amber dark--text mb-3 mt-2">{{recipe.category}}</v-chip>
                     <h4>Sub Category</h4>
@@ -76,6 +78,7 @@
 //TODO: Add comments box (optional)
 import { mapGetters, mapActions } from 'vuex';
 import { getRecipe, deleteRecipe } from '../recipesState';
+import {getUser} from '../../users/usersState'
 
 export default {
     name: 'RecipeDetails',
@@ -87,10 +90,10 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['recipe'])
+        ...mapGetters(['recipe', 'user'])
     },
     methods: {
-        ...mapActions([getRecipe, deleteRecipe]),
+        ...mapActions([getRecipe, deleteRecipe, getUser]),
 
         deleteRecipe(id) {
             this.loading = true;
@@ -102,6 +105,8 @@ export default {
     created() {
         this.recipeId = this.$route.params.id;
         this[getRecipe]({ id: this.recipeId });
+        console.log(this.recipe);
+        this[getUser]({id: this.recipe.creator})
     }
 };
 </script>
@@ -112,5 +117,9 @@ export default {
 .recipe_content {
     padding-top: 15px;
     padding-left: 10px;
+}
+.link {
+    text-decoration: none !important;
+    color: #000 !important;
 }
 </style>
