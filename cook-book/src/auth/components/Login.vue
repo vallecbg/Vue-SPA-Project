@@ -31,7 +31,8 @@
                         class="mr-4"
                         width="300"
                         @submit="login"
-                    >Login</v-btn>
+                        >Login</v-btn
+                    >
                 </v-container>
                 <v-divider></v-divider>
             </v-form>
@@ -73,7 +74,7 @@ export default {
         //TODO: add toastr notifications
 
         ...mapActions([loginSuccess]),
-        async login(){
+        async login() {
             try {
                 this.loading = true;
                 await this[loginSuccess]({

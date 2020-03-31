@@ -1,7 +1,13 @@
 <template>
     <v-container grid-list-lg>
         <v-layout row wrap class="meal-plans">
-            <v-flex v-for="recipe in allRecipes" :key="recipe._id" xs12 sm12 md4>
+            <v-flex
+                v-for="recipe in allRecipes"
+                :key="recipe._id"
+                xs12
+                sm12
+                md4
+            >
                 <RecipeCard :recipe="recipe" />
             </v-flex>
         </v-layout>
@@ -15,7 +21,7 @@
 <script>
 import { getRecipes } from '../recipesState';
 import { mapGetters, mapActions } from 'vuex';
-import RecipeCard from './RecipeCard'
+import RecipeCard from './RecipeCard';
 export default {
     name: 'list',
     components: {
@@ -30,7 +36,7 @@ export default {
         ...mapGetters(['allRecipes'])
     },
     beforeMount() {
-        this[getRecipes]()
+        this[getRecipes]();
     },
     methods: {
         ...mapActions([getRecipes])

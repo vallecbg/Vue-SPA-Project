@@ -2,8 +2,16 @@
     <div class="wrraper">
         <v-row align="center" class="card">
             <h2>Create Recipe</h2>
-            <v-form @submit.prevent="createRecipe" v-model="valid" ref="createForm">
-                <v-text-field v-model="title" :rules="titleRules" label="Title"></v-text-field>
+            <v-form
+                @submit.prevent="createRecipe"
+                v-model="valid"
+                ref="createForm"
+            >
+                <v-text-field
+                    v-model="title"
+                    :rules="titleRules"
+                    label="Title"
+                ></v-text-field>
                 <v-autocomplete
                     v-model="category"
                     :rules="categoryRules"
@@ -65,13 +73,24 @@
                         </v-btn>
                     </v-row>
                 </div>
-                <v-btn class="ma-2" dark color="green" :loading="loading" @click="addIngredient">
+                <v-btn
+                    class="ma-2"
+                    dark
+                    color="green"
+                    :loading="loading"
+                    @click="addIngredient"
+                >
                     <v-icon left dark>mdi-plus</v-icon>Ingredient
                 </v-btn>
 
-                <div v-for="(step, stepIndex) in steps" :key="stepIndex+99">
+                <div v-for="(step, stepIndex) in steps" :key="stepIndex + 99">
                     <v-row>
-                        <v-text-field v-model="step.value" :loading="loading" :rules="stepRules" label="Step"></v-text-field>
+                        <v-text-field
+                            v-model="step.value"
+                            :loading="loading"
+                            :rules="stepRules"
+                            label="Step"
+                        ></v-text-field>
                         <v-btn
                             class="mx-2"
                             fab
@@ -85,7 +104,13 @@
                         </v-btn>
                     </v-row>
                 </div>
-                <v-btn class="ma-2" dark color="green" :loading="loading" @click="addStep">
+                <v-btn
+                    class="ma-2"
+                    dark
+                    color="green"
+                    :loading="loading"
+                    @click="addStep"
+                >
                     <v-icon left dark>mdi-plus</v-icon>Step
                 </v-btn>
 
@@ -99,7 +124,13 @@
                         :loading="loading"
                         @change.native="handleFileChange($event)"
                     ></v-file-input>
-                    <v-btn class="ma-2" dark color="green" :loading="loading" @click="upload">
+                    <v-btn
+                        class="ma-2"
+                        dark
+                        color="green"
+                        :loading="loading"
+                        @click="upload"
+                    >
                         <v-icon left dark>mdi-cloud-upload</v-icon>Upload
                     </v-btn>
                 </v-row>
@@ -124,7 +155,8 @@
                         color="success"
                         class="mr-4"
                         width="300"
-                    >Create Recipe</v-btn>
+                        >Create Recipe</v-btn
+                    >
                 </v-container>
                 <v-divider></v-divider>
             </v-form>
@@ -144,8 +176,7 @@ import axios from 'axios';
 
 export default {
     name: 'CreateRecipe',
-    components: {
-    },
+    components: {},
     data() {
         return {
             valid: true,
@@ -279,7 +310,7 @@ export default {
 
         ...mapActions([createRecipe]),
         async createRecipe() {
-            if(this.results){
+            if (this.results) {
                 this.loading = true;
                 await this[createRecipe]({
                     title: this.title,
@@ -297,9 +328,9 @@ export default {
                 this.loading = false;
                 this.$router.push('/', () => {});
             } else {
-                alert('Upload the image!')
+                alert('Upload the image!');
             }
-        },
+        }
     }
 };
 </script>

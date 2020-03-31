@@ -2,7 +2,11 @@
     <div class="wrraper">
         <v-row align="center" class="card">
             <h2>Register</h2>
-            <v-form @submit.prevent="register" v-model="valid" ref="registerForm">
+            <v-form
+                @submit.prevent="register"
+                v-model="valid"
+                ref="registerForm"
+            >
                 <v-text-field
                     v-model="name"
                     :rules="nameRules"
@@ -15,8 +19,18 @@
                     label="Username"
                     :loading="loading"
                 ></v-text-field>
-                <v-text-field v-model="email" :rules="emailRules" label="E-mail" :loading="loading"></v-text-field>
-                <v-text-field v-model="city" :rules="cityRules" label="City" :loading="loading"></v-text-field>
+                <v-text-field
+                    v-model="email"
+                    :rules="emailRules"
+                    label="E-mail"
+                    :loading="loading"
+                ></v-text-field>
+                <v-text-field
+                    v-model="city"
+                    :rules="cityRules"
+                    label="City"
+                    :loading="loading"
+                ></v-text-field>
                 <v-text-field
                     v-model="state"
                     :rules="stateRules"
@@ -79,7 +93,8 @@
                         color="success"
                         class="mr-4"
                         width="300"
-                    >Register</v-btn>
+                        >Register</v-btn
+                    >
                 </v-container>
                 <v-divider></v-divider>
             </v-form>

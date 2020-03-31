@@ -3,7 +3,11 @@
         <v-row align="center" class="card">
             <h2>Edit Recipe</h2>
             <v-form @submit.prevent="editRecipe" v-model="valid" ref="editForm">
-                <v-text-field v-model="recipe.title" :rules="titleRules" label="Title"></v-text-field>
+                <v-text-field
+                    v-model="recipe.title"
+                    :rules="titleRules"
+                    label="Title"
+                ></v-text-field>
                 <v-autocomplete
                     v-model="recipe.category"
                     :rules="categoryRules"
@@ -65,11 +69,20 @@
                         </v-btn>
                     </v-row>
                 </div>
-                <v-btn class="ma-2" dark color="green" :loading="loading" @click="addIngredient">
+                <v-btn
+                    class="ma-2"
+                    dark
+                    color="green"
+                    :loading="loading"
+                    @click="addIngredient"
+                >
                     <v-icon left dark>mdi-plus</v-icon>Ingredient
                 </v-btn>
 
-                <div v-for="(step, stepIndex) in recipe.steps" :key="stepIndex+99">
+                <div
+                    v-for="(step, stepIndex) in recipe.steps"
+                    :key="stepIndex + 99"
+                >
                     <v-row>
                         <v-text-field
                             v-model="step.value"
@@ -90,7 +103,13 @@
                         </v-btn>
                     </v-row>
                 </div>
-                <v-btn class="ma-2" dark color="green" :loading="loading" @click="addStep">
+                <v-btn
+                    class="ma-2"
+                    dark
+                    color="green"
+                    :loading="loading"
+                    @click="addStep"
+                >
                     <v-icon left dark>mdi-plus</v-icon>Step
                 </v-btn>
 
@@ -110,7 +129,8 @@
                         color="success"
                         class="mr-4"
                         width="300"
-                    >Edit Recipe</v-btn>
+                        >Edit Recipe</v-btn
+                    >
                 </v-container>
                 <v-divider></v-divider>
             </v-form>

@@ -1,8 +1,5 @@
 import axios from 'axios';
-import {
-    cacheAdapterEnhancer
-} from 'axios-extensions';
-
+import { cacheAdapterEnhancer } from 'axios-extensions';
 
 const baseUrl = 'https://baas.kinvey.com';
 const appKey = 'kid_B1yjlJ1IU';
@@ -23,7 +20,7 @@ const config = {
 
 const http = axios.create(config);
 
-const authInterceptor = function (config) {
+const authInterceptor = function(config) {
     if (
         (config.url === 'login' || config.url === '') &&
         config.method === 'post'
@@ -34,8 +31,11 @@ const authInterceptor = function (config) {
             'Content-Type': 'application/json',
             Authorization: 'Basic ' + btoa(`${appKey}:${appSecret}`)
         };
-    }
-    else if (config.url[0] === '/' && config.method === 'get' && config.getUser === true) {
+    } else if (
+        config.url[0] === '/' &&
+        config.method === 'get' &&
+        config.getUser === true
+    ) {
         const token = localStorage.getItem('authtoken');
         config.baseURL = `${baseUrl}/user/${appKey}`;
         config.headers = {
@@ -43,8 +43,7 @@ const authInterceptor = function (config) {
             'Content-Type': 'application/json',
             Authorization: 'Kinvey ' + token
         };
-    }
-    else {
+    } else {
         const token = localStorage.getItem('authtoken');
         config.baseURL = `${baseUrl}/appdata/${appKey}`;
         config.headers = {
@@ -65,7 +64,7 @@ http.interceptors.request.use(authInterceptor);
 http.interceptors.request.use(loggerInterceptor);
 
 // Adding the response interceptors
-const errorInterceptor = function (error) {
+const errorInterceptor = function(error) {
     if (error.response.status === 401) {
         //TODO: replace it with toastr error
         console.error(
@@ -82,12 +81,10 @@ const errorInterceptor = function (error) {
     return Promise.reject(error);
 };
 
-const responseInterceptor = function (response) {
+const responseInterceptor = function(response) {
     return response;
 };
 
 http.interceptors.response.use(responseInterceptor, errorInterceptor);
 
-export {
-    http
-};
+export { http };

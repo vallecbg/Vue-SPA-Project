@@ -24,7 +24,7 @@ a {
 .container {
     background-color: #fff !important;
 }
-.md-theme-default{
+.md-theme-default {
     background-color: #fff;
 }
 </style>

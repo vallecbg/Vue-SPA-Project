@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import authState from '../auth/authState';
 import authRoutes from '../auth/authRoutes.js';
 import recipesRoutes from '../recipes/recipesRoutes';
-import usersRoutes from '../users/usersRoutes'
+import usersRoutes from '../users/usersRoutes';
 
 Vue.use(Router);
 

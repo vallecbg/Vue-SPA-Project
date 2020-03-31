@@ -6,5 +6,5 @@ export default [
         meta: {
             isAuthenticated: true
         }
-    },
+    }
 ];
