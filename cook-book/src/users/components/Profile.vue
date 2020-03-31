@@ -126,7 +126,7 @@ export default {
     props: {
         header: {
             type: String,
-            default: require('@/assets/img/city-profile.jpg')
+            default: require('@/assets/header.jpg')
         },
         img: {
             type: String,
