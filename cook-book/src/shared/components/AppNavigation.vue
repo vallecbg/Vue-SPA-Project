@@ -75,10 +75,10 @@
                     appTitle
                 }}</v-toolbar-title>
             </router-link>
-            <router-link class="routerLink" to="/recipes/create">
+            <router-link v-if="isAuth" class="routerLink" to="/recipes/create">
                 <v-btn text class="hidden-sm-and-down">Create Recipe</v-btn>
             </router-link>
-            <router-link class="routerLink" :to="{ path: `/users/${userId}` }">
+            <router-link v-if="isAuth" class="routerLink" :to="{ path: `/users/${userId}` }">
                 <v-btn text class="hidden-sm-and-down">My Profile</v-btn>
             </router-link>
             <v-spacer class="hidden-sm-and-down"></v-spacer>
