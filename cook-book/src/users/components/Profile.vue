@@ -1,9 +1,6 @@
 <template>
-    <div class="wrapper">
-        <Parallax
-            class="section page-header header-filter"
-            :style="headerStyle"
-        ></Parallax>
+    <div v-if="user" class="wrapper">
+        <Parallax class="section page-header header-filter" :style="headerStyle"></Parallax>
         <div class="main main-raised">
             <div class="section profile-content">
                 <div class="container">
@@ -26,17 +23,15 @@
                         </div>
                     </div>
                     <div class="description text-center">
-                        <p>
-                            {{ user.city }}, {{ user.country }}, {{ user.zip }}
-                        </p>
+                        <p>{{ user.city }}, {{ user.country }}, {{ user.zip }}</p>
                         <div class="my-2">
                             <v-btn dark color="green">Follow</v-btn>
                         </div>
                     </div>
                     <div class="profile-tabs">
                         <tabs
-                            :tab-name="['Created Recipes', 'Work', 'Favorite']"
-                            :tab-icon="['camera', 'palette', 'favorite']"
+                            :tab-name="['Recipes']"
+                            :tab-icon="['menu_book']"
                             plain
                             nav-pills-icons
                             color-button="success"
@@ -44,33 +39,26 @@
                             <!-- here you can add your content for tab-content -->
                             <template slot="tab-pane-1">
                                 <div class="md-layout">
-                                    <div
-                                        class="md-layout-item md-size-25 ml-auto"
-                                    >
-                                        <img
-                                            :src="tabPane1[0].image"
-                                            class="rounded"
-                                        />
-                                        <img
-                                            :src="tabPane1[1].image"
-                                            class="rounded"
-                                        />
-                                    </div>
-                                    <div
-                                        class="md-layout-item md-size-25 mr-auto"
-                                    >
-                                        <img
-                                            :src="tabPane1[3].image"
-                                            class="rounded"
-                                        />
-                                        <img
-                                            :src="tabPane1[2].image"
-                                            class="rounded"
-                                        />
-                                    </div>
+                                    <v-container grid-list-lg>
+                                        <v-layout row wrap class="meal-plans">
+                                            <v-flex
+                                                v-for="recipe in userRecipes"
+                                                :key="recipe._id"
+                                                xs12
+                                                sm12
+                                                md4
+                                            >
+                                                <RecipeCard :recipe="recipe" />
+                                            </v-flex>
+                                        </v-layout>
+                                        <p
+                                            v-if="userRecipes.length === 0"
+                                            class="text-center my-5"
+                                        >The user hasn't created a recipe yet!</p>
+                                    </v-container>
                                 </div>
                             </template>
-                            <template slot="tab-pane-2">
+                            <!-- <template slot="tab-pane-2">
                                 <div class="md-layout">
                                     <div
                                         class="md-layout-item md-size-25 ml-auto"
@@ -133,7 +121,7 @@
                                         />
                                     </div>
                                 </div>
-                            </template>
+                            </template>-->
                         </tabs>
                     </div>
                 </div>
@@ -145,12 +133,14 @@
 <script>
 import Tabs from './shared/Tabs.vue';
 import Parallax from './shared/Parallax.vue';
+import RecipeCard from '../../recipes/components/RecipeCard';
 import { mapGetters, mapActions } from 'vuex';
-import { getUser } from '../usersState';
+import { getUser, getUserRecipes } from '../usersState';
 export default {
     components: {
         Tabs,
-        Parallax
+        Parallax,
+        RecipeCard
     },
     bodyClass: 'profile-page',
     data() {
@@ -189,11 +179,11 @@ export default {
         },
         img: {
             type: String,
-            default: require('@/assets/img/faces/christian.jpg')
+            default: require('@/assets/img/default-avatar.png')
         }
     },
     computed: {
-        ...mapGetters(['user']),
+        ...mapGetters(['user', 'userRecipes']),
         headerStyle() {
             return {
                 backgroundImage: `url(${this.header})`
@@ -201,11 +191,18 @@ export default {
         }
     },
     methods: {
-        ...mapActions([getUser])
+        ...mapActions([getUser, getUserRecipes])
     },
     created() {
         this.userId = this.$route.params.id;
-        this[getUser]({ id: this.userId });
+        if (this.userId) {
+            this[getUser]({ id: this.userId }, () => {
+                console.log(this.user);
+            });
+            this[getUserRecipes]({ id: this.userId }, () => {
+                console.log(this.userRecipes);
+            });
+        }
     }
 };
 </script>
