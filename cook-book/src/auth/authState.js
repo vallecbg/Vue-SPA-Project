@@ -1,5 +1,5 @@
-//TODO: add toastr notifications
 import { http } from '../shared/services/httpClient';
+import {toastSuccess} from '../shared/services/notifications'
 
 const initialState = {
     isAuth: localStorage.getItem('authtoken') !== null,
@@ -27,6 +27,7 @@ const actions = {
         localStorage.setItem('authtoken', data._kmd.authtoken);
         localStorage.setItem('username', data.username);
         localStorage.setItem('userId', data._id);
+        toastSuccess("Successfully logged in!")
         commit(loginSuccess, {
             userInfo: data,
             authtoken: data._kmd.authtoken,
@@ -35,10 +36,12 @@ const actions = {
     },
     async [logoutSuccess]({ commit }) {
         localStorage.clear();
+        toastSuccess("Successfully logged out!")
         commit(logoutSuccess);
     },
     async [registerSuccess]({ commit }, payload) {
         await http.post('', payload);
+        toastSuccess("Successfully registered!")
         commit(registerSuccess);
     }
 };

@@ -1,4 +1,5 @@
 import { http } from '../shared/services/httpClient';
+import {toastSuccess} from '../shared/services/notifications'
 
 const initialState = {
     allRecipes: [],
@@ -46,17 +47,20 @@ const actions = {
     async [createRecipe]({ commit }, payload) {
         const recipe = Object.assign(payload);
         const { data } = await http.post('recipes', recipe);
+        toastSuccess("Successfully created recipe!")
         commit(createRecipe, { recipe: data });
     },
 
     async [editRecipe](_, payload) {
         const recipe = Object.assign(payload);
         await http.put(`recipes/${recipe._id}`, recipe);
+        toastSuccess("Successfully edited recipe!")
     },
 
     async [deleteRecipe]({ commit }, payload) {
         const { id } = payload;
         await http.delete(`recipes/${id}`);
+        toastSuccess("Successfully deleted recipe!")
         commit(deleteRecipe, id);
     }
 };
