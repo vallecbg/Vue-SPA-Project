@@ -20,6 +20,10 @@ const appRoutes = [
         meta: {
             isAuthenticated: true
         }
+    },
+    {
+        path: "*",
+        component: () => import('../shared/views/NotFound.vue')
     }
 ];
 
