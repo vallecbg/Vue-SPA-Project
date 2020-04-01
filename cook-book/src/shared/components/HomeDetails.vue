@@ -6,8 +6,8 @@
             >
             <List v-if="isAuth" />
             <p v-else class="text-center my-5">
-                Please, <router-link to="/login">log-in</router-link> or
-                <router-link to="/register"> register</router-link> to see the
+                Please, <router-link class="text-link" to="/login">log-in</router-link> or
+                <router-link class="text-link" to="/register"> register</router-link> to see the
                 recipes!
             </p>
         </v-layout>
@@ -27,4 +27,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.text-link {
+    color: blue !important;
+}
+</style>

@@ -100,7 +100,7 @@
             </v-form>
             <p class="text">
                 Already registered?
-                <router-link to="/login">Sign In</router-link>
+                <router-link class="text-link" to="/login">Sign In</router-link>
             </p>
         </v-row>
     </div>
@@ -212,5 +212,8 @@ export default {
 }
 h2 {
     margin-bottom: 40px;
+}
+.text-link {
+    color: blue !important;
 }
 </style>
