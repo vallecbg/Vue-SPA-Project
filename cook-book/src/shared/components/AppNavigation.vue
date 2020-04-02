@@ -26,6 +26,15 @@
 
                 <v-list-item v-if="isAuth">
                     <v-list-item-content>
+                        <v-btn class="routerMobile" text to="/blog/create"
+                            >Add Article</v-btn
+                        >
+                    </v-list-item-content>
+                </v-list-item>
+                <v-divider v-if="isAuth"></v-divider>
+
+                <v-list-item v-if="isAuth">
+                    <v-list-item-content>
                         <v-btn
                             class="routerMobile"
                             text
@@ -78,10 +87,13 @@
             <router-link v-if="isAuth" class="routerLink" to="/recipes/create">
                 <v-btn text class="hidden-sm-and-down">Create Recipe</v-btn>
             </router-link>
+            <router-link v-if="isAuth" class="routerLink" to="/blog/create">
+                <v-btn text class="hidden-sm-and-down">Add Article</v-btn>
+            </router-link>
+            <v-spacer class="hidden-sm-and-down"></v-spacer>
             <router-link v-if="isAuth" class="routerLink" :to="{ path: `/users/${userId}` }">
                 <v-btn text class="hidden-sm-and-down">My Profile</v-btn>
             </router-link>
-            <v-spacer class="hidden-sm-and-down"></v-spacer>
             <div v-if="!isAuth" class="hidden-sm-and-down">
                 <router-link class="routerLink" to="/login">
                     <v-btn text class="hidden-sm-and-down">Login</v-btn>

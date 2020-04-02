@@ -27,4 +27,8 @@ a {
 .md-theme-default {
     background-color: #fff;
 }
+.link {
+    color: #000 !important;
+    text-decoration: none !important;
+}
 </style>

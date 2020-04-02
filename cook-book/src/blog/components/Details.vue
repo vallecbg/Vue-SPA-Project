@@ -1,0 +1,89 @@
+<template>
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12 text-center my-3">
+                <h2 class="mb-3 display-3 text-uppercase">{{ article.title }}</h2>
+                <h4>Creator</h4>
+                <router-link class="link" :to="{ path: `/users/${user._id}` }">{{ user.name }}</router-link>
+                <h4>Created On</h4>
+                <p>{{article._kmd.lmt}}</p>
+            </div>
+            <div class="col-md-6 mb-4">
+                <img
+                    class="img-fluid"
+                    style="width: 400px; border-radius: 10px; box-shadow: 0 1rem 1rem rgba(0,0,0,.7);"
+                    :src="article.imageUrl"
+                    alt
+                />
+            </div>
+            <div class="col-md-6">
+                <div class="recipe-details">
+                    <div v-if="article.creator === currentUser">
+                        <h4>Manage Article</h4>
+                        <v-row class="d-inline-flex">
+                            <v-col>
+                                <v-btn
+                                    :to="{
+                                        path: `/blog/edit/${article._id}`
+                                    }"
+                                    dark
+                                    depressed
+                                    color="green"
+                                >Edit</v-btn>
+                            </v-col>
+                            <v-col>
+                                <v-btn
+                                    :loading="loading"
+                                    @click="deleteArticle({ id: article._id })"
+                                    dark
+                                    depressed
+                                    color="red"
+                                >Delete</v-btn>
+                            </v-col>
+                        </v-row>
+                    </div>
+                    <span v-html="article.content"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+</template>
+<script>
+import { mapGetters, mapActions } from 'vuex';
+import { getArticle, deleteArticle } from '../blogState';
+import { getUser } from '../../users/usersState';
+export default {
+    name: 'Details',
+    data() {
+        return {
+            loading: false,
+            articleId: null,
+            currentUser: localStorage.getItem('userId')
+        };
+    },
+    computed: {
+        ...mapGetters(['article', 'user'])
+    },
+    methods: {
+        ...mapActions([getArticle, deleteArticle, getUser]),
+
+        deleteArticle(id) {
+            this.loading = true;
+            this[deleteArticle](id);
+            this.loading = false;
+            this.$router.push('/', () => {});
+        }
+    },
+    created() {
+        this.articleId = this.$route.params.id;
+        this[getArticle]({ id: this.articleId });
+        this[getUser]({ id: this.article.creator });
+    }
+};
+</script>
+<style scoped>
+.link {
+    color: #000 !important;
+    text-decoration: none !important;
+}
+</style>
