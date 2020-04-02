@@ -4,7 +4,7 @@ import authState from '../auth/authState';
 import authRoutes from '../auth/authRoutes.js';
 import recipesRoutes from '../recipes/recipesRoutes';
 import usersRoutes from '../users/usersRoutes';
-import blogRoutes from '../blog/blogRoutes'
+import blogRoutes from '../blog/blogRoutes';
 
 Vue.use(Router);
 
@@ -23,15 +23,15 @@ const appRoutes = [
         }
     },
     {
-        path: "*",
+        path: '*',
         component: () => import('../shared/views/NotFound.vue')
     }
 ];
 
 const routes = [
-    ...appRoutes, 
-    ...authRoutes, 
-    ...recipesRoutes, 
+    ...appRoutes,
+    ...authRoutes,
+    ...recipesRoutes,
     ...usersRoutes,
     ...blogRoutes
 ];

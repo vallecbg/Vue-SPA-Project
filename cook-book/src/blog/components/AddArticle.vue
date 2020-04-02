@@ -60,13 +60,13 @@
 import axios from 'axios';
 import { mapActions } from 'vuex';
 import { createArticle } from '../blogState';
-import { VueEditor } from "vue2-editor";
+import { VueEditor } from 'vue2-editor';
 export default {
     name: 'AddArticle',
-    components:{
+    components: {
         VueEditor
     },
-    data(){
+    data() {
         return {
             valid: true,
             loading: false,
@@ -77,7 +77,7 @@ export default {
                     (v && v.length >= 3) ||
                     'Title must be at least 3 characters'
             ],
-            content: "<h1>Some initial content</h1>",
+            content: '<h1>Some initial content</h1>',
             image: null,
             imageRules: [
                 value => !!value || 'Image is required',
@@ -95,7 +95,7 @@ export default {
             progress: 0,
             showProgress: false,
             file: null
-        }
+        };
     },
     methods: {
         handleFileChange: function(event) {
@@ -178,7 +178,7 @@ export default {
             }
         }
     }
-}
+};
 </script>
 <style scoped>
 .actions {

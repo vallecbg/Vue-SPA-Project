@@ -91,7 +91,11 @@
                 <v-btn text class="hidden-sm-and-down">Add Article</v-btn>
             </router-link>
             <v-spacer class="hidden-sm-and-down"></v-spacer>
-            <router-link v-if="isAuth" class="routerLink" :to="{ path: `/users/${userId}` }">
+            <router-link
+                v-if="isAuth"
+                class="routerLink"
+                :to="{ path: `/users/${userId}` }"
+            >
                 <v-btn text class="hidden-sm-and-down">My Profile</v-btn>
             </router-link>
             <div v-if="!isAuth" class="hidden-sm-and-down">

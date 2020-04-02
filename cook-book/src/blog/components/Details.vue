@@ -2,11 +2,17 @@
     <main class="container my-5">
         <div class="row">
             <div class="col-12 text-center my-3">
-                <h2 class="mb-3 display-3 text-uppercase">{{ article.title }}</h2>
+                <h2 class="mb-3 display-3 text-uppercase">
+                    {{ article.title }}
+                </h2>
                 <h4>Creator</h4>
-                <router-link class="link" :to="{ path: `/users/${user._id}` }">{{ user.name }}</router-link>
+                <router-link
+                    class="link"
+                    :to="{ path: `/users/${user._id}` }"
+                    >{{ user.name }}</router-link
+                >
                 <h4>Created On</h4>
-                <p>{{article._kmd.lmt}}</p>
+                <p>{{ article._kmd.lmt }}</p>
             </div>
             <div class="col-md-6 mb-4">
                 <img
@@ -29,7 +35,8 @@
                                     dark
                                     depressed
                                     color="green"
-                                >Edit</v-btn>
+                                    >Edit</v-btn
+                                >
                             </v-col>
                             <v-col>
                                 <v-btn
@@ -38,7 +45,8 @@
                                     dark
                                     depressed
                                     color="red"
-                                >Delete</v-btn>
+                                    >Delete</v-btn
+                                >
                             </v-col>
                         </v-row>
                     </div>

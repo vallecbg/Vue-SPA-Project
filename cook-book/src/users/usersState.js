@@ -4,7 +4,7 @@ const initialState = {
     user: {
         _id: null
     },
-    userRecipes: [],
+    userRecipes: []
 };
 
 const actionTypes = {
@@ -22,14 +22,16 @@ const getters = {
 const actions = {
     async [getUser]({ commit }, payload) {
         const { id } = payload;
-        if (id){
-            await http.get(`/?query={"_id":"${id}"}`, {
-                getUser: true
-            }).then(user => {
-                console.log(user);
-                const data = Object.assign(user.data[0]);
-                commit(getUser, data);
-            });
+        if (id) {
+            await http
+                .get(`/?query={"_id":"${id}"}`, {
+                    getUser: true
+                })
+                .then(user => {
+                    console.log(user);
+                    const data = Object.assign(user.data[0]);
+                    commit(getUser, data);
+                });
         }
     },
     async [getUserRecipes]({ commit }, payload) {
@@ -38,7 +40,7 @@ const actions = {
         Promise.all(data).then(data => {
             commit(actionTypes.getUserRecipes, data);
         });
-    },
+    }
 };
 
 const mutations = {
@@ -48,7 +50,7 @@ const mutations = {
     },
     [getUserRecipes](state, payload) {
         Object.assign(state, { userRecipes: payload });
-    },
+    }
 };
 
 export default {

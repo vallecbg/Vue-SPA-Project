@@ -1,5 +1,5 @@
 import { http } from '../shared/services/httpClient';
-import {toastSuccess} from '../shared/services/notifications'
+import { toastSuccess } from '../shared/services/notifications';
 
 const initialState = {
     allArticles: [],
@@ -47,20 +47,20 @@ const actions = {
     async [createArticle]({ commit }, payload) {
         const article = Object.assign(payload);
         const { data } = await http.post('articles', article);
-        toastSuccess("Successfully created article!")
+        toastSuccess('Successfully created article!');
         commit(createArticle, { article: data });
     },
 
     async [editArticle](_, payload) {
         const article = Object.assign(payload);
         await http.put(`articles/${article._id}`, article);
-        toastSuccess("Successfully edited article!")
+        toastSuccess('Successfully edited article!');
     },
 
     async [deleteArticle]({ commit }, payload) {
         const { id } = payload;
         await http.delete(`articles/${id}`);
-        toastSuccess("Successfully deleted article!")
+        toastSuccess('Successfully deleted article!');
         commit(deleteArticle, id);
     }
 };

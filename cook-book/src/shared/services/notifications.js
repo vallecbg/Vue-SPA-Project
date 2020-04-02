@@ -4,34 +4,33 @@ import Toasted from 'vue-toasted';
 Vue.use(Toasted);
 
 export const toastSuccess = msg => {
-  return Vue.toasted.success(msg, {
-    icon: 'check',
-    action: {
-      text: 'Dismiss',
-      onClick: (e, toastObject) => {
-        toastObject.goAway(0);
-      }
-    },
-    duration: 3000,
-    position: 'top-right',
-    theme: 'bubble',
-    className: 'toast'
-  });
+    return Vue.toasted.success(msg, {
+        icon: 'check',
+        action: {
+            text: 'Dismiss',
+            onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+            }
+        },
+        duration: 3000,
+        position: 'top-right',
+        theme: 'bubble',
+        className: 'toast'
+    });
 };
-
 
 export const toastError = msg => {
     return Vue.toasted.error(msg, {
-      icon: 'error_outline',
-      action: {
-        text: 'Dismiss',
-        onClick: (e, toastObject) => {
-          toastObject.goAway(0);
-        }
-      },
-      duration: 3000,
-      position: 'top-right',
-      theme: 'bubble',
-      className: 'toast'
+        icon: 'error_outline',
+        action: {
+            text: 'Dismiss',
+            onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+            }
+        },
+        duration: 3000,
+        position: 'top-right',
+        theme: 'bubble',
+        className: 'toast'
     });
-  };
+};

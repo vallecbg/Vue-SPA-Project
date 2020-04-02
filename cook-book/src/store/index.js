@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import authState from '../auth/authState';
 import recipesState from '../recipes/recipesState';
 import usersState from '../users/usersState';
-import blogState from '../blog/blogState'
+import blogState from '../blog/blogState';
 
 Vue.use(Vuex);
 

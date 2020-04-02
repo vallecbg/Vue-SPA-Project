@@ -1,6 +1,9 @@
 <template>
     <div v-if="user" class="wrapper">
-        <Parallax class="section page-header header-filter" :style="headerStyle"></Parallax>
+        <Parallax
+            class="section page-header header-filter"
+            :style="headerStyle"
+        ></Parallax>
         <div class="main main-raised">
             <div class="section profile-content">
                 <div class="container">
@@ -23,7 +26,9 @@
                         </div>
                     </div>
                     <div class="description text-center">
-                        <p>{{ user.city }}, {{ user.country }}, {{ user.zip }}</p>
+                        <p>
+                            {{ user.city }}, {{ user.country }}, {{ user.zip }}
+                        </p>
                         <div class="my-2">
                             <v-btn dark color="green">Follow</v-btn>
                         </div>
@@ -54,7 +59,10 @@
                                         <p
                                             v-if="userRecipes.length === 0"
                                             class="text-center my-5"
-                                        >The user hasn't created a recipe yet!</p>
+                                        >
+                                            The user hasn't created a recipe
+                                            yet!
+                                        </p>
                                     </v-container>
                                 </div>
                             </template>

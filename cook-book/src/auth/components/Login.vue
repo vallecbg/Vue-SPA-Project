@@ -38,7 +38,9 @@
             </v-form>
             <p class="text">
                 Don't have an account?
-                <router-link class="text-link" to="/register">Register</router-link>
+                <router-link class="text-link" to="/register"
+                    >Register</router-link
+                >
             </p>
         </v-row>
     </div>

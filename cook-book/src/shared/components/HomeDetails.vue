@@ -6,9 +6,13 @@
             >
             <List v-if="isAuth" />
             <p v-else class="text-center my-5">
-                Please, <router-link class="text-link" to="/login">log-in</router-link> or
-                <router-link class="text-link" to="/register"> register</router-link> to see the
-                recipes!
+                Please,
+                <router-link class="text-link" to="/login">log-in</router-link>
+                or
+                <router-link class="text-link" to="/register">
+                    register</router-link
+                >
+                to see the recipes!
             </p>
         </v-layout>
     </v-container>
