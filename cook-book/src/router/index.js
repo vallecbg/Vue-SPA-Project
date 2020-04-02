@@ -4,6 +4,7 @@ import authState from '../auth/authState';
 import authRoutes from '../auth/authRoutes.js';
 import recipesRoutes from '../recipes/recipesRoutes';
 import usersRoutes from '../users/usersRoutes';
+import blogRoutes from '../blog/blogRoutes'
 
 Vue.use(Router);
 
@@ -27,7 +28,13 @@ const appRoutes = [
     }
 ];
 
-const routes = [...appRoutes, ...authRoutes, ...recipesRoutes, ...usersRoutes];
+const routes = [
+    ...appRoutes, 
+    ...authRoutes, 
+    ...recipesRoutes, 
+    ...usersRoutes,
+    ...blogRoutes
+];
 
 const router = new Router({
     mode: 'history',

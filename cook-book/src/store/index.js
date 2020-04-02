@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import authState from '../auth/authState';
 import recipesState from '../recipes/recipesState';
 import usersState from '../users/usersState';
+import blogState from '../blog/blogState'
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     modules: {
         authState,
         recipesState,
-        usersState
+        usersState,
+        blogState
     }
 });
