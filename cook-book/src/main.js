@@ -5,8 +5,10 @@ import store from './store';
 import vuetify from './plugins/vuetify';
 import '@babel/polyfill';
 import MaterialKit from './plugins/material-kit';
+import VueDisqus from 'vue-disqus'
 
 Vue.use(MaterialKit);
+Vue.use(VueDisqus)
 
 Vue.config.productionTip = false;
 

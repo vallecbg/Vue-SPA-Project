@@ -11,20 +11,7 @@
                     :to="{ path: `/users/${user._id}` }"
                     >{{ user.name }}</router-link
                 >
-                <h4>Created On</h4>
-                <p>{{ article._kmd.lmt }}</p>
-            </div>
-            <div class="col-md-6 mb-4">
-                <img
-                    class="img-fluid"
-                    style="width: 400px; border-radius: 10px; box-shadow: 0 1rem 1rem rgba(0,0,0,.7);"
-                    :src="article.imageUrl"
-                    alt
-                />
-            </div>
-            <div class="col-md-6">
-                <div class="recipe-details">
-                    <div v-if="article.creator === currentUser">
+                <div v-if="article.creator === currentUser">
                         <h4>Manage Article</h4>
                         <v-row class="d-inline-flex">
                             <v-col>
@@ -50,9 +37,32 @@
                             </v-col>
                         </v-row>
                     </div>
-                    <span v-html="article.content"></span>
-                </div>
+                <!-- <h4>Created On</h4>
+                <p>{{ article._kmd.lmt }}</p> -->
             </div>
+            <div class="col-md-5 mb-4">
+                <img
+                    class="img-fluid"
+                    style="width: 400px; border-radius: 10px; box-shadow: 0 1rem 1rem rgba(0,0,0,.7);"
+                    :src="article.imageUrl"
+                    alt
+                />
+                
+            </div>
+            <div class="col-md-7">
+                <v-card class="article-details">
+                    <span v-html="article.content"></span>
+                </v-card>
+            </div>
+            <div class="col-md-12">
+                <v-card class="white">
+                    <v-flex xs12>
+                        <h1 class="headline mb-0">Comments</h1>
+                        <vue-disqus shortname="cookbook-6" class="link"></vue-disqus>
+                    </v-flex>
+                </v-card>
+            </div>
+            
         </div>
     </main>
 </template>
@@ -90,8 +100,21 @@ export default {
 };
 </script>
 <style scoped>
-.link {
+.recipe_content_wrap {
+    padding: 10px 20px;
+}
+.recipe_content {
+    padding-top: 15px;
+    padding-left: 10px;
+}
+.article-details{
+    padding: 10px 10px 10px 10px;
+}
+.a {
     color: #000 !important;
     text-decoration: none !important;
+}
+.author a{
+   color: #000 !important;
 }
 </style>

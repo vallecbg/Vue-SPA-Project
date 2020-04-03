@@ -10,6 +10,7 @@ const initialState = {
 
 const actionTypes = {
     getRecipes: '[RECIPE] GET ALL RECIPES SUCCESS',
+    //getHomeRecipes: '[RECIPE] GET 3 RECIPES SUCCESS',
     getRecipe: '[RECIPE] GET SINGLE RECIPE SUCCESS',
     createRecipe: '[RECIPE] CREATE NEW RECIPE SUCCESS',
     editRecipe: '[RECIPE] EDIT SINGLE RECIPE SUCCESS',
