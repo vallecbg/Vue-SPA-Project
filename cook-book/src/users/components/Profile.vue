@@ -35,8 +35,8 @@
                     </div>
                     <div class="profile-tabs">
                         <tabs
-                            :tab-name="['Recipes']"
-                            :tab-icon="['menu_book']"
+                            :tab-name="['Recipes', 'Articles']"
+                            :tab-icon="['menu_book', 'assignment']"
                             plain
                             nav-pills-icons
                             color-button="success"
@@ -66,70 +66,30 @@
                                     </v-container>
                                 </div>
                             </template>
-                            <!-- <template slot="tab-pane-2">
+                            <template slot="tab-pane-2">
                                 <div class="md-layout">
-                                    <div
-                                        class="md-layout-item md-size-25 ml-auto"
-                                    >
-                                        <img
-                                            :src="tabPane2[0].image"
-                                            class="rounded"
-                                        />
-                                        <img
-                                            :src="tabPane2[1].image"
-                                            class="rounded"
-                                        />
-                                        <img
-                                            :src="tabPane2[2].image"
-                                            class="rounded"
-                                        />
-                                    </div>
-                                    <div
-                                        class="md-layout-item md-size-25 mr-auto"
-                                    >
-                                        <img
-                                            :src="tabPane2[3].image"
-                                            class="rounded"
-                                        />
-                                        <img
-                                            :src="tabPane2[4].image"
-                                            class="rounded"
-                                        />
-                                    </div>
+                                    <v-container grid-list-lg>
+                                        <v-layout row wrap class="meal-plans">
+                                            <v-flex
+                                                v-for="article in userArticles"
+                                                :key="article._id"
+                                                xs12
+                                                sm12
+                                                md4
+                                            >
+                                                <ArticleCard :article="article" />
+                                            </v-flex>
+                                        </v-layout>
+                                        <p
+                                            v-if="userArticles.length === 0"
+                                            class="text-center my-5"
+                                        >
+                                            The user hasn't created an article
+                                            yet!
+                                        </p>
+                                    </v-container>
                                 </div>
                             </template>
-                            <template slot="tab-pane-3">
-                                <div class="md-layout">
-                                    <div
-                                        class="md-layout-item md-size-25 ml-auto"
-                                    >
-                                        <img
-                                            :src="tabPane3[0].image"
-                                            class="rounded"
-                                        />
-                                        <img
-                                            :src="tabPane3[1].image"
-                                            class="rounded"
-                                        />
-                                    </div>
-                                    <div
-                                        class="md-layout-item md-size-25 mr-auto"
-                                    >
-                                        <img
-                                            :src="tabPane3[2].image"
-                                            class="rounded"
-                                        />
-                                        <img
-                                            :src="tabPane3[3].image"
-                                            class="rounded"
-                                        />
-                                        <img
-                                            :src="tabPane3[4].image"
-                                            class="rounded"
-                                        />
-                                    </div>
-                                </div>
-                            </template>-->
                         </tabs>
                     </div>
                 </div>
@@ -142,42 +102,20 @@
 import Tabs from './shared/Tabs.vue';
 import Parallax from './shared/Parallax.vue';
 import RecipeCard from '../../recipes/components/RecipeCard';
+import ArticleCard from '../../blog/components/ArticleCard'
 import { mapGetters, mapActions } from 'vuex';
-import { getUser, getUserRecipes } from '../usersState';
+import { getUser, getUserRecipes, getUserArticles } from '../usersState';
 export default {
     components: {
         Tabs,
         Parallax,
-        RecipeCard
+        RecipeCard,
+        ArticleCard
     },
     bodyClass: 'profile-page',
     data() {
         return {
             userId: null,
-            tabPane1: [
-                { image: require('@/assets/img/examples/studio-1.jpg') },
-                { image: require('@/assets/img/examples/studio-2.jpg') },
-                { image: require('@/assets/img/examples/studio-4.jpg') },
-                { image: require('@/assets/img/examples/studio-5.jpg') }
-            ],
-            tabPane2: [
-                { image: require('@/assets/img/examples/olu-eletu.jpg') },
-                { image: require('@/assets/img/examples/clem-onojeghuo.jpg') },
-                { image: require('@/assets/img/examples/cynthia-del-rio.jpg') },
-                {
-                    image: require('@/assets/img/examples/mariya-georgieva.jpg')
-                },
-                { image: require('@/assets/img/examples/clem-onojegaw.jpg') }
-            ],
-            tabPane3: [
-                {
-                    image: require('@/assets/img/examples/mariya-georgieva.jpg')
-                },
-                { image: require('@/assets/img/examples/studio-3.jpg') },
-                { image: require('@/assets/img/examples/clem-onojeghuo.jpg') },
-                { image: require('@/assets/img/examples/olu-eletu.jpg') },
-                { image: require('@/assets/img/examples/studio-1.jpg') }
-            ]
         };
     },
     props: {
@@ -191,7 +129,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['user', 'userRecipes']),
+        ...mapGetters(['user', 'userRecipes', 'userArticles']),
         headerStyle() {
             return {
                 backgroundImage: `url(${this.header})`
@@ -199,7 +137,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions([getUser, getUserRecipes])
+        ...mapActions([getUser, getUserRecipes, getUserArticles])
     },
     created() {
         this.userId = this.$route.params.id;
@@ -210,6 +148,7 @@ export default {
             this[getUserRecipes]({ id: this.userId }, () => {
                 console.log(this.userRecipes);
             });
+            this[getUserArticles]({ id: this.userId });
         }
     }
 };

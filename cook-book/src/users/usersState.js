@@ -4,19 +4,22 @@ const initialState = {
     user: {
         _id: null
     },
-    userRecipes: []
+    userRecipes: [],
+    userArticles: []
 };
 
 const actionTypes = {
     getUser: '[USER] GET SINGLE USER SUCCESS',
-    getUserRecipes: '[RECIPE] GET USER RECIPES SUCCESS'
+    getUserRecipes: '[RECIPE] GET USER RECIPES SUCCESS',
+    getUserArticles: '[RECIPE] GET USER ARTICLES SUCCESS'
 };
 
-export const { getUser, getUserRecipes } = actionTypes;
+export const { getUser, getUserRecipes, getUserArticles } = actionTypes;
 
 const getters = {
     user: state => state.user,
-    userRecipes: state => state.userRecipes
+    userRecipes: state => state.userRecipes,
+    userArticles: state => state.userArticles
 };
 
 const actions = {
@@ -38,16 +41,25 @@ const actions = {
         Promise.all(data).then(data => {
             commit(actionTypes.getUserRecipes, data);
         });
+    },
+    async [getUserArticles]({ commit }, payload) {
+        const { id } = payload;
+        const { data } = await http.get(`articles/?query={"creator":"${id}"}`);
+        Promise.all(data).then(data => {
+            commit(actionTypes.getUserArticles, data);
+        });
     }
 };
 
 const mutations = {
     [getUser](state, payload) {
         Object.assign(state, { user: payload });
-        //console.clear();
     },
     [getUserRecipes](state, payload) {
         Object.assign(state, { userRecipes: payload });
+    },
+    [getUserArticles](state, payload) {
+        Object.assign(state, { userArticles: payload });
     }
 };
 
