@@ -23,7 +23,7 @@ import { getRecipes } from '../recipesState';
 import { mapGetters, mapActions } from 'vuex';
 import RecipeCard from './RecipeCard';
 export default {
-    name: 'list',
+    name: 'RecipesList',
     components: {
         RecipeCard
     },

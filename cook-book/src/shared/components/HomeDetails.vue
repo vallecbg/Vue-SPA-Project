@@ -4,7 +4,7 @@
             <v-flex class="display-2 text-center my-5"
                 >The newest recipes</v-flex
             >
-            <List v-if="isAuth" />
+            <RecipesList v-if="isAuth" />
             <p v-else class="text-center my-5">
                 Please,
                 <router-link class="text-link" to="/login">log-in</router-link>
@@ -15,6 +15,21 @@
                 to see the recipes!
             </p>
         </v-layout>
+        <v-layout column>
+            <v-flex class="display-2 text-center my-5"
+                >More from our blog</v-flex
+            >
+            <ArticlesList v-if="isAuth" />
+            <p v-else class="text-center my-5">
+                Please,
+                <router-link class="text-link" to="/login">log-in</router-link>
+                or
+                <router-link class="text-link" to="/register">
+                    register</router-link
+                >
+                to see the articles!
+            </p>
+        </v-layout>
     </v-container>
 </template>
 
@@ -23,7 +38,8 @@ import { mapGetters } from 'vuex';
 export default {
     name: 'HomeDetails',
     components: {
-        List: () => import('../../recipes/components/List')
+        RecipesList: () => import('../../recipes/components/RecipesList'),
+        ArticlesList: () => import('../../blog/components/ArticlesList'),
     },
     computed: {
         ...mapGetters(['isAuth'])
