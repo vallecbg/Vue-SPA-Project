@@ -7,9 +7,11 @@
             pa-5
             style="height: auto !important; padding: 0 !important;"
         >
-            <div class="display-4 font-weight-black yellow--text text-center">
-                HEALTHY MEALS
-            </div>
+            <v-fade-transition>
+                <div transition="fab-transition" class="display-4 font-weight-black yellow--text text-center">
+                    HEALTHY MEALS
+                </div>
+            </v-fade-transition>
             <div
                 class="display-4 font-weight-black yellow--text text-center mb-3"
             >

@@ -3,17 +3,15 @@
         <v-list-item>
             <!-- <v-list-item-avatar color="grey"></v-list-item-avatar> -->
             <v-list-item-content>
-                <v-list-item-title class="headline">{{
+                <v-list-item-title class="headline">
+                    {{
                     recipe.title
-                }}</v-list-item-title>
-                <v-list-item-subtitle
-                    >by
-                    <router-link
-                        class="link"
-                        :to="{ path: `/users/${user._id}` }"
-                        >{{ user.name }}</router-link
-                    ></v-list-item-subtitle
-                >
+                    }}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                    by
+                    <router-link class="link" :to="{ path: `/users/${user._id}` }">{{ user.name }}</router-link>
+                </v-list-item-subtitle>
             </v-list-item-content>
         </v-list-item>
 
@@ -29,13 +27,7 @@
         </v-card-text>
 
         <v-card-actions>
-            <v-btn
-                outlined
-                block
-                color="red"
-                :to="{ path: `/recipes/${recipe._id}` }"
-                >Read More</v-btn
-            >
+            <v-btn outlined block color="red" :to="{ path: `/recipes/${recipe._id}` }">Read More</v-btn>
         </v-card-actions>
     </v-card>
 </template>
@@ -52,7 +44,7 @@ export default {
         ...mapGetters(['user'])
     },
     beforeMount() {
-        this[getUser](this.recipe.creator);
+        this[getUser]({id: this.recipe.creator});
     },
     methods: {
         ...mapActions([getUser])

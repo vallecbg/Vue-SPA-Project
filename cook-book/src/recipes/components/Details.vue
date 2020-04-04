@@ -133,10 +133,10 @@ export default {
             this.$router.push('/', () => {});
         }
     },
-    created() {
+    beforeMount() {
         this.recipeId = this.$route.params.id;
         this[getRecipe]({ id: this.recipeId });
-        console.log(this.recipe);
+        console.log(this.recipe.creator);
         this[getUser]({ id: this.recipe.creator });
     }
 };
