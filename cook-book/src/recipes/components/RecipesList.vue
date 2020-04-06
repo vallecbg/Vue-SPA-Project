@@ -8,7 +8,7 @@
                 sm12
                 md4
             >
-                <RecipeCard :recipe="recipe" />
+                <RecipeCard class="animated bounceInDown delay-1s" :recipe="recipe" />
             </v-flex>
         </v-layout>
         <p v-if="allRecipes.length === 0" class="text-center my-5">

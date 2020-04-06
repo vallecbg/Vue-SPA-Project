@@ -7,23 +7,19 @@
             pa-5
             style="height: auto !important; padding: 0 !important;"
         >
-            <v-fade-transition>
-                <div transition="fab-transition" class="display-4 font-weight-black yellow--text text-center">
-                    HEALTHY MEALS
-                </div>
-            </v-fade-transition>
             <div
-                class="display-4 font-weight-black yellow--text text-center mb-3"
-            >
-                FOR YOUR TABLE
-            </div>
-            <div class="display-1 font-weight-bold yellow--text text-center">
-                Finally be a foodie at home with fresh meals using our platform.
-            </div>
+                class="display-4 font-weight-black yellow--text text-center animated bounceIn delay-1s"
+            >HEALTHY MEALS</div>
+            <div
+                class="display-4 font-weight-black yellow--text text-center mb-3 animated bounceIn delay-1s"
+            >FOR YOUR TABLE</div>
+            <div
+                class="display-1 font-weight-bold yellow--text text-center animated slideInLeft delay-1s"
+            >Finally be a foodie at home with fresh meals using our platform.</div>
             <v-btn
                 @click="$vuetify.goTo('#homeDetails')"
                 fab
-                class="mt-5 white hidden-sm-and-down"
+                class="mt-5 white hidden-sm-and-down animated fadeIn delay-1s"
             >
                 <v-icon large color="yellow">arrow_downward</v-icon>
             </v-btn>

@@ -78,7 +78,8 @@ const mutations = {
         Object.assign(state, { allArticles: list });
     },
     [deleteArticle](state, payload) {
-        const list = state.allArticles.filter(r => r._id !== payload);
+        const { id } = payload;
+        const list = state.allArticles.filter(r => r._id !== id);
         Object.assign(state, { allArticles: list });
     }
 };

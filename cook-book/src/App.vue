@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <app-navigation></app-navigation>
-        <v-content transition="slide-x-transition">
+        <v-content class="animated fadeIn">
             <router-view></router-view>
         </v-content>
     </v-app>

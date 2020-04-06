@@ -1,11 +1,11 @@
 <template>
     <v-container id="homeDetails">
         <v-layout column>
-            <v-flex class="display-2 text-center my-5"
+            <v-flex class="display-2 text-center my-5 animated slideInUp delay-1s"
                 >The newest recipes</v-flex
             >
             <RecipesList v-if="isAuth" />
-            <p v-else class="text-center my-5">
+            <p v-else class="text-center my-5 animated slideInUp delay-1s">
                 Please,
                 <router-link class="text-link" to="/login">log-in</router-link>
                 or
@@ -16,11 +16,11 @@
             </p>
         </v-layout>
         <v-layout column>
-            <v-flex class="display-2 text-center my-5"
+            <v-flex class="display-2 text-center my-5 animated slideInUp delay-1s"
                 >More from our blog</v-flex
             >
             <ArticlesList v-if="isAuth" />
-            <p v-else class="text-center my-5">
+            <p v-else class="text-center my-5 animated slideInUp delay-1s">
                 Please,
                 <router-link class="text-link" to="/login">log-in</router-link>
                 or
