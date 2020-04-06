@@ -89,13 +89,15 @@ export default {
             this.loading = true;
             this[deleteArticle](id);
             this.loading = false;
-            this.$router.push('/', () => {});
+            this.$router.push(`/users/${this.currentUser}`, () => {});
         }
     },
-    created() {
+    beforeMount() {
         this.articleId = this.$route.params.id;
+        this.loading = true;
         this[getArticle]({ id: this.articleId });
         this[getUser]({ id: this.article.creator });
+        this.loading = false;
     }
 };
 </script>
