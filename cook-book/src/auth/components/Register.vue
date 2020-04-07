@@ -181,7 +181,6 @@ export default {
                 country: this.country
             });
             this.loading = false;
-            this.$router.push('/login');
         }
     }
 };

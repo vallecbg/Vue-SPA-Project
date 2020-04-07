@@ -84,7 +84,6 @@ export default {
                     password: this.password
                 });
                 this.loading = false;
-                this.$router.push('/');
             } catch (err) {
                 this.loading = false;
                 this.$refs.loginForm.reset();

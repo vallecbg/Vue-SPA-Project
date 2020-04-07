@@ -1,5 +1,5 @@
 import { http } from '../shared/services/httpClient';
-import { toastSuccess } from '../shared/services/notifications';
+import { toastSuccess, toastError } from '../shared/services/notifications';
 
 const initialState = {
     isAuth: localStorage.getItem('authtoken') !== null,
@@ -22,17 +22,24 @@ const getters = {
 
 const actions = {
     async [loginSuccess]({ commit }, payload) {
-        const { username, password } = payload;
-        const { data } = await http.post('login', { username, password });
-        localStorage.setItem('authtoken', data._kmd.authtoken);
-        localStorage.setItem('username', data.username);
-        localStorage.setItem('userId', data._id);
-        toastSuccess('Successfully logged in!');
-        commit(loginSuccess, {
-            userInfo: data,
-            authtoken: data._kmd.authtoken,
-            isAuth: true
-        });
+        try{
+            const { username, password } = payload;
+            const { data } = await http.post('login', { username, password });
+            localStorage.setItem('authtoken', data._kmd.authtoken);
+            localStorage.setItem('username', data.username);
+            localStorage.setItem('userId', data._id);
+            toastSuccess('Successfully logged in!');
+            commit(loginSuccess, {
+                userInfo: data,
+                authtoken: data._kmd.authtoken,
+                isAuth: true
+            });
+            this.$router.push('/');
+        }
+        catch(err) {
+            toastError(`Something went wrong - ${err}`)
+        }
+        
     },
     async [logoutSuccess]({ commit }) {
         localStorage.clear();
@@ -40,9 +47,15 @@ const actions = {
         commit(logoutSuccess);
     },
     async [registerSuccess]({ commit }, payload) {
-        await http.post('', payload);
-        toastSuccess('Successfully registered!');
-        commit(registerSuccess);
+        try{
+            await http.post('', payload);
+            toastSuccess('Successfully registered!');
+            commit(registerSuccess);
+            this.$router.push('/login');
+        }
+        catch (err) {
+            toastError(`Something went wrong - ${err}`)
+        }
     }
 };
 

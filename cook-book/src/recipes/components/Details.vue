@@ -68,7 +68,7 @@
             </div>
 
             <v-card
-                v-if="recipe.ingredients !== [] && recipe.steps !== []"
+                v-show="recipe.ingredients !== [] && recipe.steps !== []"
                 class="white mx-auto"
             >
                 <v-layout row wrap class="recipe_content_wrap">
