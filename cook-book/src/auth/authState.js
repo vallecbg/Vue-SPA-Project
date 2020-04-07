@@ -1,5 +1,6 @@
 import { http } from '../shared/services/httpClient';
 import { toastSuccess, toastError } from '../shared/services/notifications';
+import router from '../router/index'
 
 const initialState = {
     isAuth: localStorage.getItem('authtoken') !== null,
@@ -34,7 +35,7 @@ const actions = {
                 authtoken: data._kmd.authtoken,
                 isAuth: true
             });
-            this.$router.push('/');
+            router.push('/', () => {});
         }
         catch(err) {
             toastError(`Something went wrong - ${err}`)
@@ -51,7 +52,7 @@ const actions = {
             await http.post('', payload);
             toastSuccess('Successfully registered!');
             commit(registerSuccess);
-            this.$router.push('/login');
+            router.push('/login', () => {});
         }
         catch (err) {
             toastError(`Something went wrong - ${err}`)
