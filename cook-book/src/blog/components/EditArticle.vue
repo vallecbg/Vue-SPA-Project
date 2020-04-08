@@ -2,8 +2,16 @@
     <div class="wrraper">
         <v-row align="center" class="card">
             <h2>Edit Article</h2>
-            <v-form @submit.prevent="editArticle" v-model="valid" ref="editForm">
-                <v-text-field v-model="article.title" :rules="titleRules" label="Title"></v-text-field>
+            <v-form
+                @submit.prevent="editArticle"
+                v-model="valid"
+                ref="editForm"
+            >
+                <v-text-field
+                    v-model="article.title"
+                    :rules="titleRules"
+                    label="Title"
+                ></v-text-field>
 
                 <vue-editor class="link" v-model="article.content" />
 
@@ -15,7 +23,8 @@
                         color="success"
                         class="mr-4"
                         width="100%"
-                    >Edit Article</v-btn>
+                        >Edit Article</v-btn
+                    >
                 </v-container>
                 <v-divider></v-divider>
             </v-form>
@@ -42,7 +51,7 @@ export default {
                 v =>
                     (v && v.length >= 3) ||
                     'Title must be at least 3 characters'
-            ],
+            ]
         };
     },
     computed: {

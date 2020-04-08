@@ -8,7 +8,10 @@
                 sm12
                 md4
             >
-                <ArticleCard class="animated bounceInDown delay-1s" :article="article" />
+                <ArticleCard
+                    class="animated bounceInDown delay-1s"
+                    :article="article"
+                />
             </v-flex>
         </v-layout>
         <p v-if="allArticles.length === 0" class="text-center my-5">

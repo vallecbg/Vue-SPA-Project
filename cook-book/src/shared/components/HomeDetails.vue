@@ -1,7 +1,8 @@
 <template>
     <v-container id="homeDetails">
         <v-layout column>
-            <v-flex class="display-2 text-center my-5 animated slideInUp delay-1s"
+            <v-flex
+                class="display-2 text-center my-5 animated slideInUp delay-1s"
                 >The newest recipes</v-flex
             >
             <RecipesList v-if="isAuth" />
@@ -16,7 +17,8 @@
             </p>
         </v-layout>
         <v-layout column>
-            <v-flex class="display-2 text-center my-5 animated slideInUp delay-1s"
+            <v-flex
+                class="display-2 text-center my-5 animated slideInUp delay-1s"
                 >More from our blog</v-flex
             >
             <ArticlesList v-if="isAuth" />
@@ -39,7 +41,7 @@ export default {
     name: 'HomeDetails',
     components: {
         RecipesList: () => import('../../recipes/components/RecipesList'),
-        ArticlesList: () => import('../../blog/components/ArticlesList'),
+        ArticlesList: () => import('../../blog/components/ArticlesList')
     },
     computed: {
         ...mapGetters(['isAuth'])

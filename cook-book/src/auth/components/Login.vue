@@ -2,7 +2,7 @@
     <div class="wrraper">
         <v-row align="center" class="card">
             <h2>Login</h2>
-            <v-form @submit.prevent="login" v-model="valid" ref="loginForm">
+            <v-form @submit.native="login" v-model="valid" ref="loginForm">
                 <v-text-field
                     v-model="username"
                     :rules="usernameRules"
@@ -30,7 +30,6 @@
                         color="success"
                         class="mr-4"
                         width="300"
-                        @submit="login"
                         >Login</v-btn
                     >
                 </v-container>
@@ -73,10 +72,9 @@ export default {
         };
     },
     methods: {
-        //TODO: add toastr notifications
-
         ...mapActions([loginSuccess]),
-        async login() {
+        async login(ev) {
+            ev.preventDefault();
             try {
                 this.loading = true;
                 await this[loginSuccess]({

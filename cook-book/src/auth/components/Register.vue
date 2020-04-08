@@ -3,7 +3,7 @@
         <v-row align="center" class="card">
             <h2>Register</h2>
             <v-form
-                @submit.prevent="register"
+                @submit.native="register"
                 v-model="valid"
                 ref="registerForm"
             >
@@ -168,7 +168,8 @@ export default {
         //TODO: get user id
 
         ...mapActions([registerSuccess]),
-        async register() {
+        async register(ev) {
+            ev.preventDefault();
             this.loading = true;
             await this[registerSuccess]({
                 email: this.email,

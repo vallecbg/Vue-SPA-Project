@@ -3,13 +3,15 @@
         <v-list-item>
             <v-list-item-content>
                 <v-list-item-title class="headline">
-                    {{
-                    article.title
-                    }}
+                    {{ article.title }}
                 </v-list-item-title>
                 <v-list-item-subtitle>
                     by
-                    <router-link class="link" :to="{ path: `/users/${user._id}` }">{{ user.name }}</router-link>
+                    <router-link
+                        class="link"
+                        :to="{ path: `/users/${user._id}` }"
+                        >{{ user.name }}</router-link
+                    >
                 </v-list-item-subtitle>
             </v-list-item-content>
         </v-list-item>
@@ -26,7 +28,13 @@
         </v-card-text>
 
         <v-card-actions>
-            <v-btn outlined block color="red" :to="{ path: `/blog/${article._id}` }">Read More</v-btn>
+            <v-btn
+                outlined
+                block
+                color="red"
+                :to="{ path: `/blog/${article._id}` }"
+                >Read More</v-btn
+            >
         </v-card-actions>
     </v-card>
 </template>
@@ -43,7 +51,7 @@ export default {
         ...mapGetters(['user'])
     },
     beforeMount() {
-        this[getUser]({id: this.article.creator});
+        this[getUser]({ id: this.article.creator });
     },
     methods: {
         ...mapActions([getUser])

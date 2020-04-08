@@ -12,31 +12,31 @@
                     >{{ user.name }}</router-link
                 >
                 <div v-if="article.creator === currentUser">
-                        <h4>Manage Article</h4>
-                        <v-row class="d-inline-flex">
-                            <v-col>
-                                <v-btn
-                                    :to="{
-                                        path: `/blog/edit/${article._id}`
-                                    }"
-                                    dark
-                                    depressed
-                                    color="green"
-                                    >Edit</v-btn
-                                >
-                            </v-col>
-                            <v-col>
-                                <v-btn
-                                    :loading="loading"
-                                    @click="deleteArticle({ id: article._id })"
-                                    dark
-                                    depressed
-                                    color="red"
-                                    >Delete</v-btn
-                                >
-                            </v-col>
-                        </v-row>
-                    </div>
+                    <h4>Manage Article</h4>
+                    <v-row class="d-inline-flex">
+                        <v-col>
+                            <v-btn
+                                :to="{
+                                    path: `/blog/edit/${article._id}`
+                                }"
+                                dark
+                                depressed
+                                color="green"
+                                >Edit</v-btn
+                            >
+                        </v-col>
+                        <v-col>
+                            <v-btn
+                                :loading="loading"
+                                @click="deleteArticle({ id: article._id })"
+                                dark
+                                depressed
+                                color="red"
+                                >Delete</v-btn
+                            >
+                        </v-col>
+                    </v-row>
+                </div>
                 <!-- <h4>Created On</h4>
                 <p>{{ article._kmd.lmt }}</p> -->
             </div>
@@ -47,7 +47,6 @@
                     :src="article.imageUrl"
                     alt
                 />
-                
             </div>
             <div class="col-md-7">
                 <v-card class="article-details">
@@ -58,11 +57,13 @@
                 <v-card class="white">
                     <v-flex xs12>
                         <h1 class="headline mb-0">Comments</h1>
-                        <vue-disqus shortname="cookbook-6" class="link"></vue-disqus>
+                        <vue-disqus
+                            shortname="cookbook-6"
+                            class="link"
+                        ></vue-disqus>
                     </v-flex>
                 </v-card>
             </div>
-            
         </div>
     </main>
 </template>
@@ -109,14 +110,14 @@ export default {
     padding-top: 15px;
     padding-left: 10px;
 }
-.article-details{
+.article-details {
     padding: 10px 10px 10px 10px;
 }
 .a {
     color: #000 !important;
     text-decoration: none !important;
 }
-.author a{
-   color: #000 !important;
+.author a {
+    color: #000 !important;
 }
 </style>

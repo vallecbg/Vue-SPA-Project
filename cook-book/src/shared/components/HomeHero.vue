@@ -9,13 +9,19 @@
         >
             <div
                 class="display-4 font-weight-black yellow--text text-center animated bounceIn delay-1s"
-            >HEALTHY MEALS</div>
+            >
+                HEALTHY MEALS
+            </div>
             <div
                 class="display-4 font-weight-black yellow--text text-center mb-3 animated bounceIn delay-1s"
-            >FOR YOUR TABLE</div>
+            >
+                FOR YOUR TABLE
+            </div>
             <div
                 class="display-1 font-weight-bold yellow--text text-center animated slideInLeft delay-1s"
-            >Finally be a foodie at home with fresh meals using our platform.</div>
+            >
+                Finally be a foodie at home with fresh meals using our platform.
+            </div>
             <v-btn
                 @click="$vuetify.goTo('#homeDetails')"
                 fab

@@ -77,7 +77,9 @@
                                                 sm12
                                                 md4
                                             >
-                                                <ArticleCard :article="article" />
+                                                <ArticleCard
+                                                    :article="article"
+                                                />
                                             </v-flex>
                                         </v-layout>
                                         <p
@@ -102,7 +104,7 @@
 import Tabs from './shared/Tabs.vue';
 import Parallax from './shared/Parallax.vue';
 import RecipeCard from '../../recipes/components/RecipeCard';
-import ArticleCard from '../../blog/components/ArticleCard'
+import ArticleCard from '../../blog/components/ArticleCard';
 import { mapGetters, mapActions } from 'vuex';
 import { getUser, getUserRecipes, getUserArticles } from '../usersState';
 export default {
@@ -115,7 +117,7 @@ export default {
     bodyClass: 'profile-page',
     data() {
         return {
-            userId: null,
+            userId: null
         };
     },
     props: {

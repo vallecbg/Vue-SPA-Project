@@ -25,15 +25,15 @@ const getters = {
 const actions = {
     async [getUser]({ commit }, payload) {
         const { id } = payload;
-            await http
-                .get(`/?query={"_id":"${id}"}`, {
-                    getUser: true
-                })
-                .then(user => {
-                    console.log(user);
-                    const data = Object.assign(user.data[0]);
-                    commit(getUser, data);
-                });
+        await http
+            .get(`/?query={"_id":"${id}"}`, {
+                getUser: true
+            })
+            .then(user => {
+                console.log(user);
+                const data = Object.assign(user.data[0]);
+                commit(getUser, data);
+            });
     },
     async [getUserRecipes]({ commit }, payload) {
         const { id } = payload;

@@ -1,6 +1,6 @@
 import { http } from '../shared/services/httpClient';
 import { toastSuccess, toastError } from '../shared/services/notifications';
-import router from '../router/index'
+import router from '../router/index';
 
 const initialState = {
     isAuth: localStorage.getItem('authtoken') !== null,
@@ -23,7 +23,7 @@ const getters = {
 
 const actions = {
     async [loginSuccess]({ commit }, payload) {
-        try{
+        try {
             const { username, password } = payload;
             const { data } = await http.post('login', { username, password });
             localStorage.setItem('authtoken', data._kmd.authtoken);
@@ -36,11 +36,9 @@ const actions = {
                 isAuth: true
             });
             router.push('/', () => {});
+        } catch (err) {
+            toastError(`Something went wrong - ${err}`);
         }
-        catch(err) {
-            toastError(`Something went wrong - ${err}`)
-        }
-        
     },
     async [logoutSuccess]({ commit }) {
         localStorage.clear();
@@ -48,14 +46,13 @@ const actions = {
         commit(logoutSuccess);
     },
     async [registerSuccess]({ commit }, payload) {
-        try{
+        try {
             await http.post('', payload);
             toastSuccess('Successfully registered!');
             commit(registerSuccess);
             router.push('/login', () => {});
-        }
-        catch (err) {
-            toastError(`Something went wrong - ${err}`)
+        } catch (err) {
+            toastError(`Something went wrong - ${err}`);
         }
     }
 };
