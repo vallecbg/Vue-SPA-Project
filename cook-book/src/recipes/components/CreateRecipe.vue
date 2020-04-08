@@ -3,9 +3,9 @@
         <v-row align="center" class="card">
             <h2>Create Recipe</h2>
             <v-form
-                @submit.prevent="createRecipe"
+                @submit.native="createRecipe"
                 v-model="valid"
-                ref="createForm"
+                ref="createRecipeForm"
             >
                 <v-text-field
                     v-model="title"
@@ -309,7 +309,8 @@ export default {
         },
 
         ...mapActions([createRecipe]),
-        async createRecipe() {
+        async createRecipe(ev) {
+            ev.preventDefault();
             if (this.results) {
                 this.loading = true;
                 await this[createRecipe]({

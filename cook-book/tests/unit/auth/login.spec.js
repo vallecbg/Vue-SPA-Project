@@ -7,7 +7,7 @@ import {
   default as authModule,
   loginSuccess
 } from '../../../src/auth/authState.js';
-import AppLogin from '../../../src/auth/components/Login.vue';
+import Login from '../../../src/auth/components/Login.vue';
 
 Vue.use(Vuetify);
 
@@ -16,7 +16,7 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(VueRouter);
 
-describe('Testing AppLogin.vue', () => {
+describe('Testing Login.vue', () => {
   let store;
   let state;
   let actions;
@@ -58,7 +58,7 @@ describe('Testing AppLogin.vue', () => {
       }
     };
 
-    wrapper = shallowMount(AppLogin, options);
+    wrapper = shallowMount(Login, options);
   });
 
   it('Is Vue instance', () => {
