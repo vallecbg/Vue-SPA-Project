@@ -3,9 +3,9 @@
         <v-row align="center" class="card">
             <h2>Add Article</h2>
             <v-form
-                @submit.prevent="createArticle"
+                @submit.native="createArticle"
                 v-model="valid"
-                ref="createForm"
+                ref="createArticleForm"
             >
                 <v-text-field
                     v-model="title"
@@ -161,8 +161,9 @@ export default {
             }
         },
 
-        ...mapActions([createArticle]),
-        async createArticle() {
+        ...mapActions('blogModule', [createArticle]),
+        async createArticle(ev) {
+            ev.preventDefault();
             if (this.results) {
                 this.loading = true;
                 await this[createArticle]({

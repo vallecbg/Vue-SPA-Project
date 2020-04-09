@@ -1,12 +1,13 @@
 <template>
     <main class="container my-5">
         <div class="row">
-            <div class="col-12 text-center my-3">
+            <div id="title" class="col-12 text-center my-3">
                 <h2 class="mb-3 display-3 text-uppercase">
                     {{ article.title }}
                 </h2>
                 <h4>Creator</h4>
                 <router-link
+                    id="user-name"
                     class="link"
                     :to="{ path: `/users/${user._id}` }"
                     >{{ user.name }}</router-link
@@ -27,8 +28,9 @@
                         </v-col>
                         <v-col>
                             <v-btn
+                                id="delete-article"
                                 :loading="loading"
-                                @click="deleteArticle({ id: article._id })"
+                                @click.native="deleteArticle({ id: article._id })"
                                 dark
                                 depressed
                                 color="red"
@@ -42,6 +44,7 @@
             </div>
             <div class="col-md-5 mb-4">
                 <img
+                    id="image-url"
                     class="img-fluid"
                     style="width: 400px; border-radius: 10px; box-shadow: 0 1rem 1rem rgba(0,0,0,.7);"
                     :src="article.imageUrl"
@@ -50,7 +53,7 @@
             </div>
             <div class="col-md-7">
                 <v-card class="article-details">
-                    <span v-html="article.content"></span>
+                    <span id="content" v-html="article.content"></span>
                 </v-card>
             </div>
             <div class="col-md-12">

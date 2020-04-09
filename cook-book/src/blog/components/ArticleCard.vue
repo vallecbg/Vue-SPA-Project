@@ -2,12 +2,13 @@
     <v-card>
         <v-list-item>
             <v-list-item-content>
-                <v-list-item-title class="headline">
+                <v-list-item-title id="title" class="headline">
                     {{ article.title }}
                 </v-list-item-title>
                 <v-list-item-subtitle>
                     by
                     <router-link
+                        id="user-name"
                         class="link"
                         :to="{ path: `/users/${user._id}` }"
                         >{{ user.name }}</router-link
@@ -17,7 +18,7 @@
         </v-list-item>
 
         <v-responsive>
-            <v-img :src="article.imageUrl" height="500px"></v-img>
+            <v-img id="image-url" :src="article.imageUrl" height="500px"></v-img>
         </v-responsive>
 
         <v-card-text>
@@ -32,6 +33,7 @@
                 outlined
                 block
                 color="red"
+                id="read-more"
                 :to="{ path: `/blog/${article._id}` }"
                 >Read More</v-btn
             >
