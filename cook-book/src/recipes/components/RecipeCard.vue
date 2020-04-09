@@ -3,12 +3,13 @@
         <v-list-item>
             <!-- <v-list-item-avatar color="grey"></v-list-item-avatar> -->
             <v-list-item-content>
-                <v-list-item-title class="headline">
+                <v-list-item-title id="title" class="headline">
                     {{ recipe.title }}
                 </v-list-item-title>
                 <v-list-item-subtitle>
                     by
                     <router-link
+                        id="user-name"
                         class="link"
                         :to="{ path: `/users/${user._id}` }"
                         >{{ user.name }}</router-link
@@ -18,13 +19,13 @@
         </v-list-item>
 
         <v-responsive>
-            <v-img :src="recipe.imageUrl" height="500px"></v-img>
+            <v-img :src="recipe.imageUrl" id="image-url" height="500px"></v-img>
         </v-responsive>
 
         <v-card-text>
             <div>
                 <h3 class="headline mb-0">{{ recipe.title }}</h3>
-                <div>{{ recipe.description }}</div>
+                <div id="description">{{ recipe.description }}</div>
             </div>
         </v-card-text>
 
@@ -33,6 +34,7 @@
                 outlined
                 block
                 color="red"
+                id="read-more"
                 :to="{ path: `/recipes/${recipe._id}` }"
                 >Read More</v-btn
             >

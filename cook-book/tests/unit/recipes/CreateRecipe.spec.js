@@ -37,7 +37,6 @@ describe('Testing CreateRecipe.vue', () => {
     store = new Vuex.Store({
       modules: {
         recipeModule: {
-          namespaced: true,
           state,
           actions,
           getters: recipeModule.getters
@@ -70,12 +69,12 @@ describe('Testing CreateRecipe.vue', () => {
   });
   
 //TODO: it throws error fix it
-//   it('Dispatch action "createRecipe" when "Create" button is clicked',async () => {
-//     wrapper.find({ ref: 'createRecipeForm' }).trigger('submit');
-//     await wrapper.vm.$nextTick();
-//     console.log(actions);
-//     expect(actions[createRecipe]).toHaveBeenCalled();
-//   });
+  // it('Dispatch action "createRecipe" when "Create" button is clicked',async () => {
+  //   wrapper.find({ ref: 'createRecipeForm' }).trigger('submit');
+  //   await wrapper.vm.$nextTick();
+  //   console.log(actions);
+  //   expect(actions[createRecipe]).toHaveBeenCalled();
+  // });
 
   it('Component has all required properties', () => {
     const requiredProps = [
@@ -102,7 +101,7 @@ describe('Testing CreateRecipe.vue', () => {
     const inputFields = wrapper.findAll('v-file-input-stub').length;
     const autoCompleteFields = wrapper.findAll('v-autocomplete-stub').length;
     const textAreaFields = wrapper.findAll('v-textarea-stub').length;
-    const totalFileds = textAreaFields + inputFields + autoCompleteFields + textFields;
-    expect(totalFileds).toEqual(8);
+    const total = textAreaFields + inputFields + autoCompleteFields + textFields;
+    expect(total).toEqual(8);
   });
 });

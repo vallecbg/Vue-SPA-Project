@@ -97,4 +97,37 @@ describe('Testing RecipeCard.vue', () => {
   it('Is Vue instance', () => {
     expect(wrapper.isVueInstance()).toBe(true);
   });
+
+  it('Renders the course title', () => {
+    const recipeTitle = wrapper.vm.$options.propsData.recipe.title;
+    const htmlElement = wrapper.find('#title').html();
+    expect(htmlElement).toContain(recipeTitle);
+  });
+
+  it('Renders the creator name correctly', () => {
+    const creatorName = wrapper.vm.$store.getters['user'].name;
+    const htmlElement = wrapper.find('#user-name').html();
+    expect(htmlElement).toContain(creatorName);
+  })
+
+  it('Renders the image url correctly', () => {
+    const imageUrl = wrapper.vm.$options.propsData.recipe.imageUrl;
+    const htmlElement = wrapper.find('#image-url').html();
+    expect(htmlElement).toContain(imageUrl);
+  })
+
+  it('Renders the image url correctly', () => {
+    const description = wrapper.vm.$options.propsData.recipe.description;
+    const htmlElement = wrapper.find('#description').html();
+    expect(htmlElement).toContain(description);
+  })
+
+  it('Redirect to "/recipes/:id" after the button "Read more" is clicked', async () => {
+    const recipe = wrapper.vm.$options.propsData.recipe;
+    const route = `/recipes/${recipe._id}`;
+    wrapper.find('#read-more').trigger('click');
+    await wrapper.vm.$nextTick();
+    wrapper.vm.$router.push(route);
+    expect(wrapper.vm.$route.path).toEqual(route);
+  });
 });
