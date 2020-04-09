@@ -2,12 +2,13 @@
     <main class="container my-5">
         <div class="row">
             <div class="col-12 text-center my-3">
-                <h2 class="mb-3 display-3 text-uppercase">
+                <h2 id="title" class="mb-3 display-3 text-uppercase">
                     {{ recipe.title }}
                 </h2>
             </div>
             <div class="col-md-6 mb-4">
                 <img
+                    id="image-url"
                     class="img-fluid"
                     style="width: 400px; border-radius: 10px; box-shadow: 0 1rem 1rem rgba(0,0,0,.7);"
                     :src="recipe.imageUrl"
@@ -18,31 +19,33 @@
                 <div class="recipe-details">
                     <h4>Creator</h4>
                     <router-link
+                        id="user-name"
                         class="link"
                         :to="{ path: `/users/${user._id}` }"
                         >{{ user.name }}</router-link
                     >
                     <h4>Category</h4>
-                    <v-chip class="amber dark--text mb-3 mt-2">{{
+                    <v-chip id="category" class="amber dark--text mb-3 mt-2">{{
                         recipe.category
                     }}</v-chip>
                     <h4>Sub Category</h4>
-                    <v-chip class="amber dark--text mb-3 mt-2">{{
+                    <v-chip id="subCategory" class="amber dark--text mb-3 mt-2">{{
                         recipe.subCategory
                     }}</v-chip>
                     <h4>⏱ Preparation time</h4>
-                    <p>{{ recipe.prepTime }} hours</p>
+                    <p id="prepTime">{{ recipe.prepTime }} hours</p>
                     <h4>🕒 Cooking time</h4>
-                    <p>{{ recipe.cookTime }} hours</p>
+                    <p id="cookTime">{{ recipe.cookTime }} hours</p>
                     <h4>Servings</h4>
-                    <p>{{ recipe.servings }} portions</p>
+                    <p id="servings">{{ recipe.servings }} portions</p>
                     <h4>Description</h4>
-                    <p>{{ recipe.description }}</p>
+                    <p id="description">{{ recipe.description }}</p>
                     <div v-if="recipe.creator === currentUser">
                         <h4>Manage Recipe</h4>
                         <v-row class="d-inline-flex">
                             <v-col>
                                 <v-btn
+                                    id="edit-recipe"
                                     :to="{
                                         path: `/recipes/edit/${recipe._id}`
                                     }"
@@ -54,8 +57,9 @@
                             </v-col>
                             <v-col>
                                 <v-btn
+                                    id="delete-recipe"
                                     :loading="loading"
-                                    @click="deleteRecipe({ id: recipe._id })"
+                                    @click.native="deleteRecipe({ id: recipe._id })"
                                     dark
                                     depressed
                                     color="red"
@@ -136,7 +140,6 @@ export default {
     beforeMount() {
         this.recipeId = this.$route.params.id;
         this[getRecipe]({ id: this.recipeId });
-        console.log(this.recipe.creator);
         this[getUser]({ id: this.recipe.creator });
     }
 };
