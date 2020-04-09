@@ -144,7 +144,6 @@ describe('Testing Details.vue', () => {
       const descriptionHtml = wrapper.find('#description').html();
       expect(descriptionHtml).toContain(description);
   })
-  //TODO check the router link if redirects correctly
 
   it('Calls "deleteRecipe" when "delete" button is clicked', async () => {
     wrapper.setData({currentUser: '5e7208cd77bd160016dd56a5'});
