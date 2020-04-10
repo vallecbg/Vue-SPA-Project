@@ -71,3 +71,16 @@ There are 2 roles - User and Guest
 ### User Info
 ![alt text](https://image.prntscr.com/image/6rrsxtIoRMKS03Bd_PeYqQ.png)
 ![alt text](https://image.prntscr.com/image/xiK04iS7RTiUCRo3OFjeuA.png)
+
+## Technologies used and bonuses
+
+ - Vue JS
+ - Used Vuex for State Management
+ - Vuetify
+ - Kinvey Database
+ - Deployed the application in cloud environment (Heroku)
+ - Used File Storage Cloud API (Cloudinary)
+ - Created animations using Vue's built-in transitions and Animate.css library
+ - Created Unit Tests
+ - Created Interceptor for the axios requests
+
