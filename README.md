@@ -6,7 +6,7 @@
 Demo: https://cookbook-vue.herokuapp.com/
 
 ## Demo Users
-Email: test@mail.com
+Username: asdasd
 Password: 123456
 
 ## Description
