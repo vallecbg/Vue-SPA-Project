@@ -3,7 +3,7 @@
 
 ## Type - Social Network for Cookers and Chefs
 
-Demo: https://cookbook-vue.herokuapp.com/
+Demo: https://cook-book-vue.herokuapp.com/
 
 ## Demo Users
 Username: asdasd
