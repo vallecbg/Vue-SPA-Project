@@ -83,4 +83,5 @@ There are 2 roles - User and Guest
  - Created animations using Vue's built-in transitions and Animate.css library
  - Created Unit Tests
  - Created Interceptor for the axios requests
+ - Navigation guard to show if the user is logged in
 
