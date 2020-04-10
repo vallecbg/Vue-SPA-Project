@@ -49,7 +49,7 @@ There are 2 roles - User and Guest
 ## Screenshots
 ### Home Page - Guest
 ![alt text](https://image.prntscr.com/image/my9yjbsRRW6n0Ica04jkBg.png)
-![alt text](https://image.prntscr.com/image/Sa7vd7tgRpGdJXqb2DvQ1A.png)
+![alt text](https://image.prntscr.com/image/sqebbqJiSp_IpPLX1Lma2w.png)
 ### Authentication
 ![alt text](https://image.prntscr.com/image/_0iC0672TZ26uNdRYQXm2w.png)
 ![alt text](https://image.prntscr.com/image/I-VjfMThQJe78lCPJTL2bA.png)
@@ -59,13 +59,13 @@ There are 2 roles - User and Guest
 ![alt text](https://image.prntscr.com/image/BpxuL_L5T3Kiv79wGdKpJg.png)
 ### Recipe Details
 ![alt text](https://image.prntscr.com/image/b-0PIEeDTwOl5ZTQWzA9-Q.png)
-![alt text](https://image.prntscr.com/image/cO6ujZ3xQK2vOMO4G6pNsQ.png)
+![alt text](https://image.prntscr.com/image/YGxyuE_5S_SuVmd2na-ZLA.png)
 ### Article Details
 ![alt text](https://image.prntscr.com/image/gYSrllNjRyCy04UnQCdRrw.png)
-![alt text](https://image.prntscr.com/image/ToZGjTC_Sc6YMhQzItWJXw.png)
+![alt text](https://image.prntscr.com/image/g-oQTCNRRqeYlHE10T0EhQ.png)
 ### Create Recipe
 ![alt text](https://image.prntscr.com/image/7-RxCrSqSySb094AdN2OXw.png)
-![alt text](https://image.prntscr.com/image/SamNLkp6SzyGj67t8-twIw.png)
+![alt text](https://image.prntscr.com/image/_OPu2D-zQbKKrBHC0iiM5Q.png)
 ### Create Article
 ![alt text](https://image.prntscr.com/image/GJv7n8dHRAiozi8DyrPNMg.png)
 ### User Info
