@@ -4,7 +4,7 @@ import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import {
-  default as blogModule,
+  default as blogState,
   createArticle
 } from '../../../src/blog/blogState.js';
 import AddArticle from '../../../src/blog/components/AddArticle.vue';
@@ -36,10 +36,10 @@ describe('Testing AddArticle.vue', () => {
 
     store = new Vuex.Store({
       modules: {
-        blogModule: {
+        blogState: {
           state,
           actions,
-          getters: blogModule.getters
+          getters: blogState.getters
         }
       }
     });

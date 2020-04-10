@@ -57,7 +57,8 @@
     </div>
 </template>
 <script>
-import axios from 'axios';
+//import axios from 'axios';
+import { uploadImg } from '../../shared/services/imageUpload.js';
 import { mapActions } from 'vuex';
 import { createArticle } from '../blogState';
 import { VueEditor } from 'vue2-editor';
@@ -134,7 +135,7 @@ export default {
                     };
                     //show progress bar at beginning of post
                     this.showProgress = true;
-                    axios(requestObj)
+                    uploadImg(requestObj)
                         .then(response => {
                             this.results = response.data;
                             console.log(this.results);
@@ -161,7 +162,7 @@ export default {
             }
         },
 
-        ...mapActions('blogModule', [createArticle]),
+        ...mapActions([createArticle]),
         async createArticle(ev) {
             ev.preventDefault();
             if (this.results) {

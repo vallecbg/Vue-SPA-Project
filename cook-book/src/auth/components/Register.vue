@@ -164,9 +164,6 @@ export default {
         }
     },
     methods: {
-        //TODO: add toastr notifications
-        //TODO: get user id
-
         ...mapActions([registerSuccess]),
         async register(ev) {
             ev.preventDefault();

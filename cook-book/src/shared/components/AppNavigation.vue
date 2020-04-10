@@ -134,6 +134,9 @@ export default {
             userId: localStorage.getItem('userId')
         };
     },
+    created(){
+        console.log(this.userId);
+    },
     computed: {
         ...mapGetters(['isAuth'])
     },

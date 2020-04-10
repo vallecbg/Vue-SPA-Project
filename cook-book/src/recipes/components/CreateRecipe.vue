@@ -165,14 +165,11 @@
 </template>
 
 <script>
-//TODO: fix the categories and subcategories to call them from an API
-//TODO: add more categories and subcategories
-
-//TODO: extract the upload method in separate file (optional)
 //TODO: add multiple images (optional)
+
 import { mapActions } from 'vuex';
 import { createRecipe } from '../recipesState';
-import axios from 'axios';
+import { uploadImg } from '../../shared/services/imageUpload.js';
 
 export default {
     name: 'CreateRecipe',
@@ -281,7 +278,7 @@ export default {
                     };
                     //show progress bar at beginning of post
                     this.showProgress = true;
-                    axios(requestObj)
+                    uploadImg(requestObj)
                         .then(response => {
                             this.results = response.data;
                             console.log(this.results);

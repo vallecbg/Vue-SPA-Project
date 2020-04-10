@@ -37,7 +37,7 @@ const actions = {
             });
             router.push('/', () => {});
         } catch (err) {
-            toastError(`Something went wrong - ${err}`);
+            //toastError(`Something went wrong - ${err}`);
         }
     },
     async [logoutSuccess]({ commit }) {

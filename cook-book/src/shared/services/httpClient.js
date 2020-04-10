@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { cacheAdapterEnhancer } from 'axios-extensions';
+import {
+    cacheAdapterEnhancer
+} from 'axios-extensions';
+import {
+    toastError
+} from './notifications.js'
 
 const baseUrl = 'https://baas.kinvey.com';
 const appKey = 'kid_B1yjlJ1IU';
@@ -20,7 +25,7 @@ const config = {
 
 const http = axios.create(config);
 
-const authInterceptor = function(config) {
+const authInterceptor = function (config) {
     if (
         (config.url === 'login' || config.url === '') &&
         config.method === 'post'
@@ -64,27 +69,24 @@ http.interceptors.request.use(authInterceptor);
 http.interceptors.request.use(loggerInterceptor);
 
 // Adding the response interceptors
-const errorInterceptor = function(error) {
+const errorInterceptor = function (error) {
     if (error.response.status === 401) {
-        //TODO: replace it with toastr error
-        console.error(
+        toastError(
             `${error.response.statusText}: ${error.response.data.description}`
         );
     } else if (error.response.status === 500) {
-        //TODO: replace it with toastr error
-        console.error(`${error.response.statusText}: Server Error`);
-    } else {
-        //TODO: replace it with toastr error
-        console.error(`${error.response.statusText}`);
+        toastError(`${error.response.statusText}: Server Error`);
     }
 
     return Promise.reject(error);
 };
 
-const responseInterceptor = function(response) {
+const responseInterceptor = function (response) {
     return response;
 };
 
 http.interceptors.response.use(responseInterceptor, errorInterceptor);
 
-export { http };
+export {
+    http
+};

@@ -30,7 +30,6 @@ const actions = {
                 getUser: true
             })
             .then(user => {
-                console.log(user);
                 const data = Object.assign(user.data[0]);
                 commit(getUser, data);
             });

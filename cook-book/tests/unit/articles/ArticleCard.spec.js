@@ -4,7 +4,7 @@ import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import {
-  default as blogModule,
+  default as blogState,
   getArticle
 } from '../../../src/blog/blogState.js';
 import { default as userModule, getUser } from '../../../src/users/usersState';
@@ -32,7 +32,7 @@ describe('Testing ArticleCard.vue', () => {
     router = new VueRouter();
     state = {};
 
-    mutations = blogModule.mutations;
+    mutations = blogState.mutations;
 
     actions = {
       [getArticle]: jest.fn(),
@@ -41,11 +41,11 @@ describe('Testing ArticleCard.vue', () => {
 
     store = new Vuex.Store({
       modules: {
-        blogModule: {
+        blogState: {
           state,
           actions,
           mutations,
-          getters: blogModule.getters
+          getters: blogState.getters
         },
         userModule: {
           state: {
